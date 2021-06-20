@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Cleaning data and identifying problem type | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Cleaning data and identifying problem type" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://redditech.github.io/team-fast-tabulous/2021/06/20/Clean-data-and-identify-problem-type.html" />
+<meta property="og:url" content="https://redditech.github.io/team-fast-tabulous/2021/06/20/Clean-data-and-identify-problem-type.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-20T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"An easy to use blogging platform with support for Jupyter Notebooks.","url":"https://redditech.github.io/team-fast-tabulous/2021/06/20/Clean-data-and-identify-problem-type.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/2021/06/20/Clean-data-and-identify-problem-type.html"},"headline":"Cleaning data and identifying problem type","dateModified":"2021-06-20T00:00:00-05:00","datePublished":"2021-06-20T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/team-fast-tabulous/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://redditech.github.io/team-fast-tabulous/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/team-fast-tabulous/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/team-fast-tabulous/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/team-fast-tabulous/about/">About Me</a><a class="page-link" href="/team-fast-tabulous/search/">Search</a><a class="page-link" href="/team-fast-tabulous/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Cleaning data and identifying problem type</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-20T00:00:00-05:00" itemprop="datePublished">
+        Jun 20, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/redditech/team-fast-tabulous/tree/master/_notebooks/2021-06-20-Clean-data-and-identify-problem-type.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/redditech/team-fast-tabulous/master?filepath=_notebooks%2F2021-06-20-Clean-data-and-identify-problem-type.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/redditech/team-fast-tabulous/blob/master/_notebooks/2021-06-20-Clean-data-and-identify-problem-type.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-06-20-Clean-data-and-identify-problem-type.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">Uqq</span> <span class="n">fastbook</span> <span class="n">kaggle</span> <span class="n">waterfallcharts</span> <span class="n">treeinterpreter</span> <span class="n">dtreeviz</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>     |████████████████████████████████| 727kB 7.5MB/s 
+     |████████████████████████████████| 61kB 8.9MB/s 
+     |████████████████████████████████| 1.2MB 15.7MB/s 
+     |████████████████████████████████| 194kB 37.5MB/s 
+     |████████████████████████████████| 51kB 9.3MB/s 
+     |████████████████████████████████| 61kB 10.4MB/s 
+     |████████████████████████████████| 61kB 10.5MB/s 
+  Building wheel for waterfallcharts (setup.py) ... done
+  Building wheel for dtreeviz (setup.py) ... done
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">fastbook</span>
+<span class="n">fastbook</span><span class="o">.</span><span class="n">setup_book</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mounted at /content/gdrive
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">fastbook</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fastai.vision.widgets</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_string_dtype</span><span class="p">,</span> <span class="n">is_numeric_dtype</span><span class="p">,</span> <span class="n">is_categorical_dtype</span>
+<span class="kn">from</span> <span class="nn">fastai.tabular.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">dtreeviz.trees</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display_svg</span><span class="p">,</span> <span class="n">SVG</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">btn_upload</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileUpload</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;kaggle.json&quot;</span><span class="p">)</span>
+<span class="n">btn_upload</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">cred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;~/.kaggle/kaggle.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cred_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">cred_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">btn_upload</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cred_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">cred_file</span><span class="p">:</span>
+        <span class="n">cred_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">btn_upload</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cred_path</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="mo">0o600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">kaggle</span> <span class="kn">import</span> <span class="n">api</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># and is only v1.5.4 while kaggle.api is v1.5.12</span>
+<span class="err">!</span><span class="n">kaggle</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Kaggle API 1.5.4
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;1.5.12&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">path_hqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">/</span><span class="s2">&quot;_data&quot;</span><span class="p">)</span>
+<span class="n">path_hqc</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Path</span><span class="o">.</span><span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">path_hqc</span>
+<span class="n">api</span><span class="o">.</span><span class="n">competition_download_cli</span><span class="p">(</span><span class="s1">&#39;homesite-quote-conversion&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path_hqc</span><span class="p">)</span>
+<span class="n">file_extract</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">&quot;homesite-quote-conversion.zip&quot;</span><span class="p">)</span>
+<span class="n">file_extract</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">&quot;train.csv.zip&quot;</span><span class="p">)</span>
+<span class="n">file_extract</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">&quot;test.csv.zip&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  0%|          | 0.00/62.0M [00:00&lt;?, ?B/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Downloading homesite-quote-conversion.zip to /content/_data
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 62.0M/62.0M [00:00&lt;00:00, 75.9MB/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">&quot;train.csv&quot;</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>QuoteNumber</th>
+      <th>Original_Quote_Date</th>
+      <th>QuoteConversion_Flag</th>
+      <th>Field6</th>
+      <th>...</th>
+      <th>GeographicField62A</th>
+      <th>GeographicField62B</th>
+      <th>GeographicField63</th>
+      <th>GeographicField64</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2013-08-16</td>
+      <td>0</td>
+      <td>B</td>
+      <td>...</td>
+      <td>-1</td>
+      <td>10</td>
+      <td>N</td>
+      <td>CA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2014-04-22</td>
+      <td>0</td>
+      <td>F</td>
+      <td>...</td>
+      <td>-1</td>
+      <td>20</td>
+      <td>N</td>
+      <td>NJ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>2014-08-25</td>
+      <td>0</td>
+      <td>F</td>
+      <td>...</td>
+      <td>-1</td>
+      <td>8</td>
+      <td>N</td>
+      <td>NJ</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>2013-04-15</td>
+      <td>0</td>
+      <td>J</td>
+      <td>...</td>
+      <td>-1</td>
+      <td>21</td>
+      <td>N</td>
+      <td>TX</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8</td>
+      <td>2014-01-25</td>
+      <td>0</td>
+      <td>E</td>
+      <td>...</td>
+      <td>-1</td>
+      <td>12</td>
+      <td>N</td>
+      <td>IL</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 299 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;QuoteNumber&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="c1"># Conclusion: QuoteNumber is unique</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((260753, 299), 260753)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;QuoteNumber&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 260753 entries, 1 to 434588
+Columns: 298 entries, Original_Quote_Date to GeographicField64
+dtypes: float64(6), int64(264), object(28)
+memory usage: 594.8+ MB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dtypes in train.csv:&quot;</span><span class="p">,</span> <span class="n">dct_fields_by_dtype</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fields for object dtype:&quot;</span><span class="p">,</span> <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of fields of object dtype:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>dtypes in train.csv: dict_keys([dtype(&#39;O&#39;), dtype(&#39;int64&#39;), dtype(&#39;float64&#39;)])
+fields for object dtype: [&#39;Original_Quote_Date&#39;, &#39;Field6&#39;, &#39;Field10&#39;, &#39;Field12&#39;, &#39;CoverageField8&#39;, &#39;CoverageField9&#39;, &#39;SalesField7&#39;, &#39;PersonalField7&#39;, &#39;PersonalField16&#39;, &#39;PersonalField17&#39;, &#39;PersonalField18&#39;, &#39;PersonalField19&#39;, &#39;PropertyField3&#39;, &#39;PropertyField4&#39;, &#39;PropertyField5&#39;, &#39;PropertyField7&#39;, &#39;PropertyField14&#39;, &#39;PropertyField28&#39;, &#39;PropertyField30&#39;, &#39;PropertyField31&#39;, &#39;PropertyField32&#39;, &#39;PropertyField33&#39;, &#39;PropertyField34&#39;, &#39;PropertyField36&#39;, &#39;PropertyField37&#39;, &#39;PropertyField38&#39;, &#39;GeographicField63&#39;, &#39;GeographicField64&#39;]
+number of fields of object dtype: 28
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Original_Quote_Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Original_Quote_Date&#39;</span><span class="p">])</span>
+<span class="c1"># recalculate breakdown now that we have changed dtype of Original_Quote_Date</span>
+<span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 260753 entries, 1 to 434588
+Columns: 298 entries, Original_Quote_Date to GeographicField64
+dtypes: datetime64[ns](1), float64(6), int64(264), object(27)
+memory usage: 594.8+ MB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">&quot;test.csv&quot;</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;Original_Quote_Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;Original_Quote_Date&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;train.csv&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Original_Quote_Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Original_Quote_Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test.csv &quot;</span><span class="p">,</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;Original_Quote_Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;Original_Quote_Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1"># Conclusion: overlapping date ranges (in fact identical date ranges) so </span>
+<span class="c1"># don&#39;t need to consider as time series problem</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>train.csv 2013-01-01 00:00:00 2015-05-18 00:00:00 (260753, 298)
+test.csv  2013-01-01 00:00:00 2015-05-18 00:00:00 (173836, 298)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Field6               [&#39;B&#39; &#39;F&#39; &#39;J&#39; &#39;E&#39; &#39;C&#39; &#39;K&#39; &#39;A&#39; &#39;D&#39;]
+Field10              [&#39;965&#39; &#39;548&#39; &#39;1,165&#39; &#39;1,487&#39; &#39;935&#39; &#39;564&#39; &#39;1,113&#39; &#39;1,480&#39;]
+Field12              [&#39;N&#39; &#39;Y&#39;]
+CoverageField8       [&#39;T&#39; &#39;Y&#39; &#39;X&#39; &#39;W&#39; &#39;V&#39; &#39;U&#39; &#39;Z&#39;]
+CoverageField9       [&#39;D&#39; &#39;E&#39; &#39;J&#39; &#39;F&#39; &#39;A&#39; &#39;G&#39; &#39;K&#39; &#39;C&#39; &#39;L&#39; &#39;B&#39; &#39;I&#39; &#39;H&#39;]
+SalesField7          [&#39;V&#39; &#39;P&#39; &#39;K&#39; &#39;R&#39; &#39;T&#39; &#39;Q&#39; &#39;M&#39;]
+PersonalField7       [&#39;N&#39; &#39;Y&#39; nan]
+PersonalField16      [&#39;ZA&#39; &#39;XB&#39; &#39;ZH&#39; &#39;XO&#39; &#39;YE&#39; &#39;XR&#39; &#39;ZG&#39; &#39;ZF&#39; &#39;XW&#39; &#39;XS&#39; &#39;ZT&#39; &#39;XD&#39; &#39;XH&#39; &#39;XM&#39; &#39;YH&#39; &#39;ZD&#39; &#39;XJ&#39; &#39;ZN&#39; &#39;YF&#39; &#39;XX&#39; &#39;XL&#39; &#39;XQ&#39; &#39;ZJ&#39; &#39;ZR&#39; &#39;ZW&#39; &#39;XE&#39; &#39;XC&#39; &#39;ZK&#39; &#39;XK&#39; &#39;ZC&#39; &#39;XZ&#39; &#39;XI&#39; &#39;ZE&#39; &#39;ZU&#39; &#39;YI&#39; &#39;XP&#39; &#39;ZO&#39; &#39;ZP&#39; &#39;ZB&#39;
+ &#39;XF&#39; &#39;ZS&#39; &#39;XT&#39; &#39;XY&#39; &#39;ZQ&#39; &#39;ZI&#39; &#39;XV&#39; &#39;XU&#39; &#39;XN&#39; &#39;ZV&#39; &#39;ZL&#39;]
+PersonalField17      [&#39;ZE&#39; &#39;YJ&#39; &#39;XS&#39; &#39;XE&#39; &#39;XU&#39; &#39;ZQ&#39; &#39;YY&#39; &#39;XV&#39; &#39;ZF&#39; &#39;XK&#39; &#39;YS&#39; &#39;ZK&#39; &#39;YF&#39; &#39;YV&#39; &#39;XG&#39; &#39;ZL&#39; &#39;ZH&#39; &#39;ZW&#39; &#39;XH&#39; &#39;ZU&#39; &#39;YH&#39; &#39;XC&#39; &#39;ZV&#39; &#39;XR&#39; &#39;ZI&#39; &#39;XX&#39; &#39;YR&#39; &#39;XW&#39; &#39;ZC&#39; &#39;YZ&#39; &#39;YU&#39; &#39;YX&#39; &#39;ZA&#39; &#39;ZP&#39; &#39;XI&#39; &#39;YN&#39; &#39;YL&#39; &#39;YK&#39; &#39;ZN&#39;
+ &#39;XT&#39; &#39;ZT&#39; &#39;XQ&#39; &#39;XB&#39; &#39;YI&#39; &#39;YM&#39; &#39;XL&#39; &#39;YQ&#39; &#39;ZG&#39; &#39;ZS&#39; &#39;YT&#39; &#39;ZO&#39; &#39;YE&#39; &#39;XN&#39; &#39;ZM&#39; &#39;XM&#39; &#39;YG&#39; &#39;YP&#39; &#39;XD&#39; &#39;ZD&#39; &#39;YW&#39; &#39;XJ&#39; &#39;ZB&#39; &#39;XP&#39; &#39;XO&#39; &#39;ZR&#39; &#39;XY&#39;]
+PersonalField18      [&#39;XR&#39; &#39;YE&#39; &#39;YP&#39; &#39;YI&#39; &#39;XQ&#39; &#39;ZW&#39; &#39;XT&#39; &#39;XF&#39; &#39;XS&#39; &#39;YG&#39; &#39;ZF&#39; &#39;XZ&#39; &#39;XI&#39; &#39;XK&#39; &#39;YF&#39; &#39;ZE&#39; &#39;YQ&#39; &#39;ZP&#39; &#39;YL&#39; &#39;ZD&#39; &#39;XW&#39; &#39;YN&#39; &#39;YK&#39; &#39;ZJ&#39; &#39;ZK&#39; &#39;ZC&#39; &#39;XU&#39; &#39;ZN&#39; &#39;XP&#39; &#39;XL&#39; &#39;XM&#39; &#39;ZL&#39; &#39;XC&#39; &#39;ZH&#39; &#39;XG&#39; &#39;XN&#39; &#39;XY&#39; &#39;ZQ&#39; &#39;XO&#39;
+ &#39;ZT&#39; &#39;XJ&#39; &#39;ZA&#39; &#39;ZU&#39; &#39;XE&#39; &#39;ZV&#39; &#39;ZS&#39; &#39;YR&#39; &#39;YH&#39; &#39;YJ&#39; &#39;ZR&#39; &#39;ZO&#39; &#39;YO&#39; &#39;ZM&#39; &#39;XD&#39; &#39;YM&#39; &#39;XX&#39; &#39;ZB&#39; &#39;XH&#39; &#39;XV&#39; &#39;ZG&#39; &#39;ZI&#39;]
+PersonalField19      [&#39;XD&#39; &#39;XT&#39; &#39;XC&#39; &#39;XX&#39; &#39;ZQ&#39; &#39;ZT&#39; &#39;ZO&#39; &#39;YJ&#39; &#39;ZN&#39; &#39;YH&#39; &#39;ZI&#39; &#39;YN&#39; &#39;YF&#39; &#39;YK&#39; &#39;XY&#39; &#39;XI&#39; &#39;ZA&#39; &#39;ZW&#39; &#39;ZV&#39; &#39;XU&#39; &#39;ZL&#39; &#39;XK&#39; &#39;XW&#39; &#39;XF&#39; &#39;ZK&#39; &#39;YE&#39; &#39;XB&#39; &#39;XZ&#39; &#39;XP&#39; &#39;ZJ&#39; &#39;YM&#39; &#39;XO&#39; &#39;YG&#39; &#39;XN&#39; &#39;ZR&#39; &#39;ZE&#39; &#39;ZB&#39; &#39;ZG&#39; &#39;YL&#39;
+ &#39;ZF&#39; &#39;XR&#39; &#39;XJ&#39; &#39;XM&#39; &#39;ZP&#39; &#39;XQ&#39; &#39;XV&#39; &#39;ZH&#39; &#39;XE&#39; &#39;ZU&#39; &#39;ZM&#39; &#39;XG&#39; &#39;ZD&#39; &#39;XH&#39; &#39;XL&#39; &#39;YI&#39; &#39;XS&#39; &#39;ZC&#39;]
+PropertyField3       [&#39;N&#39; &#39;Y&#39; nan]
+PropertyField4       [&#39;N&#39; &#39;Y&#39; nan]
+PropertyField5       [&#39;Y&#39; &#39;N&#39;]
+PropertyField7       [&#39;O&#39; &#39;N&#39; &#39;R&#39; &#39;D&#39; &#39;S&#39; &#39;J&#39; &#39;I&#39; &#39;Q&#39; &#39;A&#39; &#39;K&#39; &#39;G&#39; &#39;F&#39; &#39;H&#39; &#39;E&#39; &#39;L&#39; &#39;C&#39; &#39;P&#39; &#39;M&#39; &#39;B&#39;]
+PropertyField14      [&#39;C&#39; &#39;B&#39; &#39;A&#39; &#39;D&#39;]
+PropertyField28      [&#39;B&#39; &#39;D&#39; &#39;A&#39; &#39;C&#39;]
+PropertyField30      [&#39;N&#39; &#39;Y&#39;]
+PropertyField31      [&#39;N&#39; &#39;O&#39; &#39;K&#39; &#39;M&#39;]
+PropertyField32      [&#39;Y&#39; &#39;N&#39; nan]
+PropertyField33      [&#39;G&#39; &#39;H&#39; &#39;E&#39; &#39;F&#39;]
+PropertyField34      [&#39;Y&#39; &#39;N&#39; nan]
+PropertyField36      [&#39;N&#39; &#39;Y&#39; nan]
+PropertyField37      [&#39;N&#39; &#39;Y&#39;]
+PropertyField38      [&#39;N&#39; &#39;Y&#39; nan]
+GeographicField63    [&#39;N&#39; &#39;Y&#39; &#39; &#39;]
+GeographicField64    [&#39;CA&#39; &#39;NJ&#39; &#39;TX&#39; &#39;IL&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Field10&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Field10&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 260753 entries, 1 to 434588
+Columns: 298 entries, Original_Quote_Date to GeographicField64
+dtypes: datetime64[ns](1), float64(6), int64(265), object(26)
+memory usage: 594.8+ MB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"3661454ba9bb4468ba4fc22f488819d6": {"model_module": "@jupyter-widgets/controls", "model_name": "FileUploadModel", "state": {"_view_name": "FileUploadView", "_counter": 1, "style": "IPY_MODEL_16e3a636035347aaa77254f120c9d34f", "_dom_classes": [], "description": "kaggle.json", "multiple": false, "_model_name": "FileUploadModel", "data": [null], "button_style": "", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "accept": "", "_view_count": null, "disabled": false, "_view_module_version": "1.5.0", "error": "", "description_tooltip": null, "metadata": [{"name": "kaggle.json", "type": "application/json", "size": 68, "lastModified": 1623143484266}], "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_cfc6f6281932403ca570b23bca591325", "icon": "upload"}}, "16e3a636035347aaa77254f120c9d34f": {"model_module": "@jupyter-widgets/controls", "model_name": "ButtonStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ButtonStyleModel", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "button_color": null, "font_weight": "", "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "cfc6f6281932403ca570b23bca591325": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
+</script>
+
+
+
+  </div><a class="u-url" href="/team-fast-tabulous/2021/06/20/Clean-data-and-identify-problem-type.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/team-fast-tabulous/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/team-fast-tabulous/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
