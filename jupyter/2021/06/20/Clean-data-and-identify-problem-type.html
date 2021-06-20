@@ -8,15 +8,15 @@
 <meta name="generator" content="Jekyll v4.1.1" />
 <meta property="og:title" content="Cleaning data and identifying problem type" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This notebook works in Google Colab. It" />
-<meta property="og:description" content="This notebook works in Google Colab. It" />
+<meta name="description" content="This notebook works in Google Colab. It gets data from kaggle’s homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series" />
+<meta property="og:description" content="This notebook works in Google Colab. It gets data from kaggle’s homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series" />
 <link rel="canonical" href="https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Clean-data-and-identify-problem-type.html" />
 <meta property="og:url" content="https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Clean-data-and-identify-problem-type.html" />
 <meta property="og:site_name" content="fastpages" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-06-20T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"This notebook works in Google Colab. It","url":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Clean-data-and-identify-problem-type.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Clean-data-and-identify-problem-type.html"},"headline":"Cleaning data and identifying problem type","dateModified":"2021-06-20T00:00:00-05:00","datePublished":"2021-06-20T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"description":"This notebook works in Google Colab. It gets data from kaggle’s homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series","url":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Clean-data-and-identify-problem-type.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Clean-data-and-identify-problem-type.html"},"headline":"Cleaning data and identifying problem type","dateModified":"2021-06-20T00:00:00-05:00","datePublished":"2021-06-20T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/team-fast-tabulous/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://redditech.github.io/team-fast-tabulous/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/team-fast-tabulous/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -71,7 +71,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Cleaning data and identifying problem type</h1><p class="page-description">This notebook works in Google Colab. It</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-20T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Cleaning data and identifying problem type</h1><p class="page-description">This notebook works in Google Colab. It gets data from kaggle's homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-20T00:00:00-05:00" itemprop="datePublished">
         Jun 20, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
