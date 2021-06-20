@@ -7,6 +7,7 @@
 <title>Identify problem type | fastpages</title>
 <meta name="generator" content="Jekyll v4.1.1" />
 <meta property="og:title" content="Identify problem type" />
+<meta name="author" content="Tim Cummings" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This notebook works in Google Colab. It gets data from kaggle’s homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series" />
 <meta property="og:description" content="This notebook works in Google Colab. It gets data from kaggle’s homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series" />
@@ -16,7 +17,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-06-20T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"This notebook works in Google Colab. It gets data from kaggle’s homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series","url":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Identify-problem-type.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Identify-problem-type.html"},"headline":"Identify problem type","dateModified":"2021-06-20T00:00:00-05:00","datePublished":"2021-06-20T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"description":"This notebook works in Google Colab. It gets data from kaggle’s homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series","url":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Identify-problem-type.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/06/20/Identify-problem-type.html"},"headline":"Identify problem type","dateModified":"2021-06-20T00:00:00-05:00","datePublished":"2021-06-20T00:00:00-05:00","author":{"@type":"Person","name":"Tim Cummings"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/team-fast-tabulous/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://redditech.github.io/team-fast-tabulous/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/team-fast-tabulous/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -73,7 +74,9 @@ window.onload = wrap_img;
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Identify problem type</h1><p class="page-description">This notebook works in Google Colab. It gets data from kaggle's homesite-quote-conversion, cleans dates and ints stored as str, checks quote date in training data and test data to see if time series</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-20T00:00:00-05:00" itemprop="datePublished">
         Jun 20, 2021
-      </time>
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Tim Cummings</span></span>
        • <span class="read-time" title="Estimated read time">
     
     
@@ -132,33 +135,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Install packages recommended in fastbook Ch09</span>
-<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">Uqq</span> <span class="n">fastbook</span> <span class="n">kaggle</span> <span class="n">waterfallcharts</span> <span class="n">treeinterpreter</span> <span class="n">dtreeviz</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Install packages recommended in fastbook Ch09</span>
+<span class="o">!</span>pip install -Uqq fastbook kaggle waterfallcharts treeinterpreter dtreeviz
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>     |████████████████████████████████| 727kB 7.5MB/s 
-     |████████████████████████████████| 61kB 8.9MB/s 
-     |████████████████████████████████| 1.2MB 15.7MB/s 
-     |████████████████████████████████| 194kB 37.5MB/s 
-     |████████████████████████████████| 51kB 9.3MB/s 
-     |████████████████████████████████| 61kB 10.4MB/s 
-     |████████████████████████████████| 61kB 10.5MB/s 
-  Building wheel for waterfallcharts (setup.py) ... done
-  Building wheel for dtreeviz (setup.py) ... done
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -172,7 +153,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">fastbook</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">fastbook</span>
 <span class="n">fastbook</span><span class="o">.</span><span class="n">setup_book</span><span class="p">()</span>
 </pre></div>
 
@@ -204,7 +185,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">fastbook</span> <span class="kn">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastbook</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">fastai.vision.widgets</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_string_dtype</span><span class="p">,</span> <span class="n">is_numeric_dtype</span><span class="p">,</span> <span class="n">is_categorical_dtype</span>
 <span class="kn">from</span> <span class="nn">fastai.tabular.all</span> <span class="kn">import</span> <span class="o">*</span>
@@ -231,7 +212,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Upload your kaggle.json API key</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Upload your kaggle.json API key</span>
 <span class="n">btn_upload</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileUpload</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"kaggle.json"</span><span class="p">)</span>
 <span class="n">btn_upload</span>
 </pre></div>
@@ -250,7 +231,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Save credentials</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Save credentials</span>
 <span class="n">cred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'~/.kaggle/kaggle.json'</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">cred_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="n">cred_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
@@ -274,7 +255,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">kaggle</span> <span class="kn">import</span> <span class="n">api</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">kaggle</span> <span class="kn">import</span> <span class="n">api</span>
 </pre></div>
 
     </div>
@@ -291,9 +272,9 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Note that '!pip install kaggle' does not update cli kaggle in Google colab</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Note that '!pip install kaggle' does not update cli kaggle in Google colab</span>
 <span class="c1"># and is only v1.5.4 while kaggle.api is v1.5.12</span>
-<span class="err">!</span><span class="n">kaggle</span> <span class="o">--</span><span class="n">version</span>
+<span class="o">!</span>kaggle --version
 </pre></div>
 
     </div>
@@ -324,7 +305,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># python kaggle.api is using a more recent version</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># python kaggle.api is using a more recent version</span>
 <span class="n">api</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 
@@ -358,7 +339,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Get data from kaggle, extract and store in _data</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get data from kaggle, extract and store in _data</span>
 <span class="n">path_hqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">/</span><span class="s2">"_data"</span><span class="p">)</span>
 <span class="n">path_hqc</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">Path</span><span class="o">.</span><span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">path_hqc</span>
@@ -419,7 +400,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Check what the data looks like</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check what the data looks like</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -546,7 +527,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Check how much data we have and check if QuoteNumber is unique</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check how much data we have and check if QuoteNumber is unique</span>
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'QuoteNumber'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 <span class="c1"># Conclusion: QuoteNumber is unique</span>
 </pre></div>
@@ -581,7 +562,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># We don't want to use QuoteNumber as a feature but we could use it as the index</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We don't want to use QuoteNumber as a feature but we could use it as the index</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'QuoteNumber'</span><span class="p">)</span>
 </pre></div>
 
@@ -599,7 +580,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Examine data types in train.csv</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Examine data types in train.csv</span>
 <span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
@@ -635,7 +616,7 @@ memory usage: 594.8+ MB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Find the 28 fields which do not have numeric datatypes</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Find the 28 fields which do not have numeric datatypes</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
@@ -675,7 +656,7 @@ number of fields of object dtype: 28
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Original_Quote_Date can be converted to datetime</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Original_Quote_Date can be converted to datetime</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">])</span>
 <span class="c1"># recalculate breakdown now that we have changed dtype of Original_Quote_Date</span>
 <span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
@@ -717,13 +698,13 @@ memory usage: 594.8+ MB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Compare Original_Quote_Date in train.csv and test.csv</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compare Original_Quote_Date in train.csv and test.csv</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">df_test</span><span class="p">[</span><span class="s2">"Original_Quote_Date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="s2">"Original_Quote_Date"</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"test.csv "</span><span class="p">,</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="c1"># Conclusion: overlapping date ranges (in fact identical date ranges) so </span>
-<span class="c1"># don't need to consider as time series problem</span>
+<span class="c1"># don't need to consider as time series problem </span>
 </pre></div>
 
     </div>
@@ -755,7 +736,7 @@ test.csv  2013-01-01 00:00:00 2015-05-18 00:00:00 (173836, 298)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Check the non-numeric values in other object fields</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check the non-numeric values in other object fields</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">'O'</span><span class="p">)]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
@@ -818,7 +799,7 @@ GeographicField64    ['CA' 'NJ' 'TX' 'IL']
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Field10 looks like integers stored as strings so convert to ints</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Field10 looks like integers stored as strings so convert to ints</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">'Field10'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Field10'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
@@ -855,7 +836,7 @@ memory usage: 594.8+ MB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># recalculate breakdown now that we have changed dtype of Field10</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># recalculate breakdown now that we have changed dtype of Field10</span>
 <span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
     <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
@@ -871,7 +852,7 @@ memory usage: 594.8+ MB
 </div>
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"3661454ba9bb4468ba4fc22f488819d6": {"model_module": "@jupyter-widgets/controls", "model_name": "FileUploadModel", "state": {"_view_name": "FileUploadView", "_counter": 1, "style": "IPY_MODEL_16e3a636035347aaa77254f120c9d34f", "_dom_classes": [], "description": "kaggle.json", "multiple": false, "_model_name": "FileUploadModel", "data": [null], "button_style": "", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "accept": "", "_view_count": null, "disabled": false, "_view_module_version": "1.5.0", "error": "", "description_tooltip": null, "metadata": [{"name": "kaggle.json", "type": "application/json", "size": 68, "lastModified": 1623143484266}], "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_cfc6f6281932403ca570b23bca591325", "icon": "upload"}}, "16e3a636035347aaa77254f120c9d34f": {"model_module": "@jupyter-widgets/controls", "model_name": "ButtonStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ButtonStyleModel", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "button_color": null, "font_weight": "", "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "cfc6f6281932403ca570b23bca591325": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
+{"16e3a636035347aaa77254f120c9d34f": {"model_module": "@jupyter-widgets/controls", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "3661454ba9bb4468ba4fc22f488819d6": {"model_module": "@jupyter-widgets/controls", "model_name": "FileUploadModel", "state": {"_counter": 1, "_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FileUploadModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FileUploadView", "accept": "", "button_style": "", "data": [null], "description": "kaggle.json", "description_tooltip": null, "disabled": false, "error": "", "icon": "upload", "layout": "IPY_MODEL_cfc6f6281932403ca570b23bca591325", "metadata": [{"lastModified": 1623143484266, "name": "kaggle.json", "size": 68, "type": "application/json"}], "multiple": false, "style": "IPY_MODEL_16e3a636035347aaa77254f120c9d34f"}}, "cfc6f6281932403ca570b23bca591325": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}
 </script>
 
 
