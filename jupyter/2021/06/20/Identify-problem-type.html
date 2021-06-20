@@ -80,7 +80,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      10 min read
     
 </span></p>
 
@@ -128,6 +128,14 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Install packages recommended in fastbook Ch09</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -135,11 +143,32 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Install packages recommended in fastbook Ch09</span>
-<span class="o">!</span>pip install -Uqq fastbook kaggle waterfallcharts treeinterpreter dtreeviz
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -Uqq fastbook kaggle waterfallcharts treeinterpreter dtreeviz
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>     |████████████████████████████████| 727kB 25.5MB/s 
+     |████████████████████████████████| 61kB 10.1MB/s 
+     |████████████████████████████████| 194kB 41.2MB/s 
+     |████████████████████████████████| 1.2MB 48.1MB/s 
+     |████████████████████████████████| 51kB 8.8MB/s 
+     |████████████████████████████████| 61kB 9.6MB/s 
+     |████████████████████████████████| 61kB 10.2MB/s 
+  Building wheel for waterfallcharts (setup.py) ... done
+  Building wheel for dtreeviz (setup.py) ... done
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -205,6 +234,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Upload your kaggle.json API key</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -212,8 +249,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Upload your kaggle.json API key</span>
-<span class="n">btn_upload</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileUpload</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"kaggle.json"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">btn_upload</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileUpload</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"kaggle.json"</span><span class="p">)</span>
 <span class="n">btn_upload</span>
 </pre></div>
 
@@ -224,6 +260,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Save credentials</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -231,8 +275,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Save credentials</span>
-<span class="n">cred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'~/.kaggle/kaggle.json'</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'~/.kaggle/kaggle.json'</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">cred_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="n">cred_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">btn_upload</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -265,6 +308,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that '!pip install kaggle' does not update cli kaggle in Google colab and is only v1.5.4 while kaggle.api is v1.5.12</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -272,9 +323,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Note that '!pip install kaggle' does not update cli kaggle in Google colab</span>
-<span class="c1"># and is only v1.5.4 while kaggle.api is v1.5.12</span>
-<span class="o">!</span>kaggle --version
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>kaggle --version
 </pre></div>
 
     </div>
@@ -298,6 +347,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python's <code>kaggle.api</code> is using a more recent version</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -305,8 +362,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># python kaggle.api is using a more recent version</span>
-<span class="n">api</span><span class="o">.</span><span class="n">__version__</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 
     </div>
@@ -332,6 +388,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Get data from kaggle, extract and store in _data</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -339,8 +403,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get data from kaggle, extract and store in _data</span>
-<span class="n">path_hqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">/</span><span class="s2">"_data"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path_hqc</span> <span class="o">=</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">/</span><span class="s2">"_data"</span><span class="p">)</span>
 <span class="n">path_hqc</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">Path</span><span class="o">.</span><span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">path_hqc</span>
 <span class="n">api</span><span class="o">.</span><span class="n">competition_download_cli</span><span class="p">(</span><span class="s1">'homesite-quote-conversion'</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path_hqc</span><span class="p">)</span>
@@ -359,7 +422,7 @@ window.onload = wrap_img;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>  0%|          | 0.00/62.0M [00:00&lt;?, ?B/s]</pre>
+<pre> 29%|██▉       | 18.0M/62.0M [00:00&lt;00:00, 184MB/s]</pre>
 </div>
 </div>
 
@@ -374,7 +437,7 @@ window.onload = wrap_img;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 62.0M/62.0M [00:00&lt;00:00, 75.9MB/s]
+<pre>100%|██████████| 62.0M/62.0M [00:00&lt;00:00, 259MB/s]
 </pre>
 </div>
 </div>
@@ -393,6 +456,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check what the data looks like</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -400,8 +471,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check what the data looks like</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -520,6 +590,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check how much data we have and check if <code>QuoteNumber</code> is unique</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -527,9 +605,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check how much data we have and check if QuoteNumber is unique</span>
-<span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'QuoteNumber'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
-<span class="c1"># Conclusion: QuoteNumber is unique</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'QuoteNumber'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -555,6 +631,22 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Conclusion: <code>QuoteNumber</code> <strong><em>is</em></strong> unique</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We don't want to use <code>QuoteNumber</code> as a feature but we could use it as the index</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -562,8 +654,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We don't want to use QuoteNumber as a feature but we could use it as the index</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'QuoteNumber'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'QuoteNumber'</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -573,6 +664,14 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Examine data types in <code>train.csv</code></p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -580,8 +679,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Examine data types in train.csv</span>
-<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -595,9 +693,9 @@ window.onload = wrap_img;
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
-Int64Index: 260753 entries, 1 to 434588
-Columns: 298 entries, Original_Quote_Date to GeographicField64
-dtypes: float64(6), int64(264), object(28)
+RangeIndex: 260753 entries, 0 to 260752
+Columns: 299 entries, QuoteNumber to GeographicField64
+dtypes: float64(6), int64(265), object(28)
 memory usage: 594.8+ MB
 </pre>
 </div>
@@ -609,6 +707,14 @@ memory usage: 594.8+ MB
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find the 28 fields which do not have numeric datatypes</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -616,8 +722,7 @@ memory usage: 594.8+ MB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Find the 28 fields which do not have numeric datatypes</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
     <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
@@ -636,7 +741,7 @@ memory usage: 594.8+ MB
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>dtypes in train.csv: dict_keys([dtype('O'), dtype('int64'), dtype('float64')])
+<pre>dtypes in train.csv: dict_keys([dtype('int64'), dtype('O'), dtype('float64')])
 fields for object dtype: ['Original_Quote_Date', 'Field6', 'Field10', 'Field12', 'CoverageField8', 'CoverageField9', 'SalesField7', 'PersonalField7', 'PersonalField16', 'PersonalField17', 'PersonalField18', 'PersonalField19', 'PropertyField3', 'PropertyField4', 'PropertyField5', 'PropertyField7', 'PropertyField14', 'PropertyField28', 'PropertyField30', 'PropertyField31', 'PropertyField32', 'PropertyField33', 'PropertyField34', 'PropertyField36', 'PropertyField37', 'PropertyField38', 'GeographicField63', 'GeographicField64']
 number of fields of object dtype: 28
 </pre>
@@ -649,6 +754,14 @@ number of fields of object dtype: 28
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>Original_Quote_Date</code> can be converted to datetime</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -656,14 +769,8 @@ number of fields of object dtype: 28
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Original_Quote_Date can be converted to datetime</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">])</span>
-<span class="c1"># recalculate breakdown now that we have changed dtype of Original_Quote_Date</span>
-<span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
-    <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span> <span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">])</span>
+<span class="c1"># </span>
 </pre></div>
 
     </div>
@@ -691,6 +798,14 @@ memory usage: 594.8+ MB
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Recalculate breakdown now that we have changed dtype of <code>Original_Quote_Date</code></p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -698,13 +813,57 @@ memory usage: 594.8+ MB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compare Original_Quote_Date in train.csv and test.csv</span>
-<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 260753 entries, 0 to 260752
+Columns: 299 entries, QuoteNumber to GeographicField64
+dtypes: float64(6), int64(265), object(28)
+memory usage: 594.8+ MB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compare <code>Original_Quote_Date</code> in <code>train.csv</code> and <code>test.csv</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_hqc</span><span class="o">/</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">df_test</span><span class="p">[</span><span class="s2">"Original_Quote_Date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="s2">"Original_Quote_Date"</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"test.csv "</span><span class="p">,</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="c1"># Conclusion: overlapping date ranges (in fact identical date ranges) so </span>
-<span class="c1"># don't need to consider as time series problem </span>
 </pre></div>
 
     </div>
@@ -729,6 +888,22 @@ test.csv  2013-01-01 00:00:00 2015-05-18 00:00:00 (173836, 298)
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Conclusion: overlapping date ranges (in fact identical date ranges) so don't need to consider as time series problem</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check the non-numeric values in other object fields</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -736,8 +911,7 @@ test.csv  2013-01-01 00:00:00 2015-05-18 00:00:00 (173836, 298)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check the non-numeric values in other object fields</span>
-<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">'O'</span><span class="p">)]:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">'O'</span><span class="p">)]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
@@ -751,7 +925,65 @@ test.csv  2013-01-01 00:00:00 2015-05-18 00:00:00 (173836, 298)
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Field6               ['B' 'F' 'J' 'E' 'C' 'K' 'A' 'D']
+<pre>Original_Quote_Date  ['2013-08-16' '2014-04-22' '2014-08-25' '2013-04-15' '2014-01-25' '2014-01-18' '2013-11-01' '2014-05-14' '2013-06-19' '2013-06-18' '2013-09-24' '2013-06-11' '2013-10-22' '2013-08-20' '2015-02-24'
+ '2014-10-27' '2015-02-06' '2013-10-02' '2014-09-15' '2014-03-18' '2014-10-15' '2014-04-03' '2015-03-31' '2013-05-30' '2015-03-30' '2013-09-17' '2015-03-07' '2013-06-06' '2013-01-22' '2013-04-16'
+ '2014-03-04' '2014-02-24' '2015-05-12' '2014-02-01' '2013-08-12' '2015-05-13' '2014-04-13' '2014-05-02' '2015-05-18' '2015-01-28' '2013-12-30' '2014-06-20' '2014-01-08' '2014-10-08' '2013-07-26'
+ '2013-07-11' '2014-12-15' '2014-12-08' '2015-02-22' '2013-09-19' '2015-05-07' '2015-01-14' '2013-04-22' '2014-05-29' '2014-02-12' '2014-06-02' '2014-05-18' '2014-01-20' '2013-07-16' '2013-02-15'
+ '2015-03-11' '2015-03-12' '2014-07-30' '2013-08-23' '2013-08-30' '2013-04-03' '2013-06-20' '2015-01-25' '2013-12-10' '2015-01-05' '2013-12-03' '2014-11-18' '2013-07-29' '2013-12-25' '2015-01-16'
+ '2015-03-05' '2015-05-09' '2013-08-09' '2015-04-09' '2013-02-07' '2015-01-07' '2015-01-02' '2013-05-24' '2014-12-31' '2014-12-04' '2015-02-05' '2013-05-13' '2013-11-19' '2014-08-27' '2013-05-05'
+ '2014-06-26' '2013-06-04' '2013-01-14' '2014-06-28' '2014-02-05' '2014-10-30' '2013-10-06' '2014-05-16' '2015-03-29' '2013-10-08' '2015-03-21' '2014-07-15' '2014-04-02' '2013-04-02' '2014-01-13'
+ '2013-08-29' '2014-07-21' '2013-10-17' '2014-08-09' '2014-04-15' '2014-07-18' '2013-01-21' '2015-05-05' '2013-11-02' '2014-03-06' '2013-12-31' '2015-01-03' '2013-11-13' '2015-03-09' '2013-01-11'
+ '2013-09-15' '2014-01-06' '2013-04-06' '2013-10-23' '2013-10-03' '2013-10-19' '2014-02-03' '2014-12-03' '2013-04-25' '2014-05-08' '2013-02-11' '2014-12-19' '2014-08-13' '2014-11-11' '2015-04-27'
+ '2015-02-20' '2015-05-06' '2013-02-13' '2015-04-20' '2014-05-23' '2014-03-26' '2013-09-07' '2013-11-10' '2014-02-11' '2013-09-30' '2014-08-29' '2014-05-20' '2013-04-10' '2015-02-21' '2014-01-07'
+ '2014-06-13' '2015-03-25' '2015-04-15' '2014-09-09' '2014-01-23' '2014-03-09' '2013-04-27' '2013-10-14' '2014-03-25' '2014-05-30' '2013-10-18' '2013-10-26' '2014-07-29' '2013-10-21' '2015-02-13'
+ '2014-06-19' '2014-02-21' '2013-01-30' '2013-03-05' '2015-02-23' '2014-02-13' '2013-05-21' '2014-03-14' '2013-03-26' '2014-04-09' '2015-02-08' '2014-04-04' '2015-05-03' '2013-03-15' '2015-02-19'
+ '2014-06-18' '2013-02-16' '2013-06-05' '2013-09-29' '2013-02-18' '2013-03-23' '2014-11-17' '2015-01-09' '2015-03-10' '2015-03-27' '2014-02-17' '2014-08-02' '2014-08-10' '2014-01-02' '2013-10-10'
+ '2013-10-04' '2013-11-12' '2014-07-31' '2014-01-30' '2013-06-25' '2014-02-19' '2014-01-14' '2013-11-27' '2015-04-08' '2014-10-02' '2014-12-09' '2014-07-05' '2014-03-05' '2014-06-09' '2013-12-06'
+ '2014-09-25' '2013-08-06' '2013-09-13' '2013-09-20' '2014-09-18' '2015-02-04' '2013-09-03' '2015-04-01' '2013-05-27' '2013-10-16' '2014-09-06' '2014-12-18' '2014-09-05' '2013-07-09' '2015-02-27'
+ '2014-02-04' '2014-05-15' '2014-09-17' '2014-03-19' '2013-10-31' '2013-12-27' '2013-07-02' '2014-07-16' '2014-06-11' '2013-01-18' '2013-05-01' '2014-06-17' '2013-05-22' '2014-04-01' '2013-07-12'
+ '2013-10-25' '2014-08-18' '2014-01-22' '2013-08-22' '2013-02-08' '2014-11-19' '2014-03-20' '2015-01-29' '2013-06-17' '2013-08-13' '2013-07-25' '2014-04-14' '2014-10-31' '2015-03-17' '2013-10-29'
+ '2014-01-10' '2014-01-11' '2013-01-28' '2015-02-12' '2013-07-15' '2014-08-08' '2013-05-03' '2013-01-26' '2013-01-03' '2014-07-24' '2014-08-23' '2013-06-26' '2015-01-27' '2013-05-19' '2015-04-19'
+ '2014-06-30' '2014-02-14' '2013-10-15' '2015-04-25' '2013-06-09' '2013-04-17' '2014-07-02' '2014-09-08' '2014-01-15' '2015-04-07' '2014-03-12' '2014-01-17' '2015-04-21' '2013-08-01' '2013-07-08'
+ '2014-09-22' '2014-07-17' '2014-10-29' '2014-12-07' '2014-08-04' '2014-03-21' '2014-03-08' '2014-04-30' '2013-05-14' '2014-09-19' '2013-03-21' '2013-04-30' '2014-12-26' '2014-08-03' '2014-09-14'
+ '2014-11-22' '2015-02-17' '2013-03-19' '2015-04-13' '2014-06-25' '2013-05-17' '2014-01-28' '2013-09-25' '2014-05-21' '2013-11-08' '2013-12-28' '2015-03-18' '2013-04-19' '2014-11-06' '2014-03-15'
+ '2014-12-23' '2013-10-07' '2013-05-15' '2015-02-26' '2013-09-10' '2013-08-07' '2015-04-28' '2014-10-17' '2013-02-05' '2013-05-07' '2014-07-08' '2013-10-24' '2015-03-08' '2013-08-14' '2015-01-13'
+ '2014-03-31' '2015-04-14' '2015-01-17' '2014-09-11' '2013-01-19' '2014-11-24' '2013-03-13' '2013-02-26' '2014-05-13' '2014-09-03' '2013-05-20' '2013-08-11' '2014-12-12' '2013-03-27' '2014-09-29'
+ '2013-09-11' '2015-02-15' '2014-03-27' '2013-12-24' '2014-11-03' '2015-03-16' '2013-12-14' '2014-06-12' '2014-07-14' '2014-07-28' '2013-01-20' '2014-05-03' '2014-10-28' '2014-05-06' '2015-04-10'
+ '2013-05-11' '2013-05-28' '2013-02-27' '2015-02-09' '2015-03-26' '2015-03-15' '2013-04-12' '2013-03-06' '2015-01-26' '2014-06-24' '2013-01-29' '2014-04-05' '2013-03-04' '2013-07-14' '2013-04-11'
+ '2014-06-04' '2013-06-10' '2014-06-06' '2014-12-01' '2014-03-11' '2014-11-15' '2014-02-16' '2013-12-04' '2013-02-04' '2015-02-18' '2013-11-26' '2015-04-26' '2014-02-22' '2013-11-11' '2014-05-12'
+ '2014-06-14' '2013-01-05' '2014-09-13' '2013-12-05' '2014-06-22' '2015-04-03' '2013-07-31' '2014-12-10' '2013-11-25' '2013-03-07' '2013-08-05' '2014-06-27' '2013-07-22' '2014-02-20' '2013-04-26'
+ '2014-12-02' '2013-03-28' '2013-08-25' '2014-10-11' '2015-04-02' '2015-04-06' '2014-10-01' '2014-11-21' '2014-11-12' '2014-05-19' '2014-12-16' '2013-09-06' '2015-04-29' '2014-05-09' '2014-05-25'
+ '2013-12-09' '2014-11-30' '2014-10-06' '2013-03-12' '2013-04-05' '2013-06-03' '2014-08-11' '2014-10-12' '2015-02-11' '2013-09-04' '2015-05-14' '2013-01-04' '2014-04-07' '2014-03-07' '2014-03-13'
+ '2014-05-22' '2013-01-17' '2013-11-14' '2014-04-18' '2013-05-02' '2014-01-29' '2015-03-02' '2013-09-12' '2013-01-25' '2014-07-11' '2014-01-05' '2013-08-31' '2014-04-16' '2014-10-09' '2013-06-29'
+ '2014-06-29' '2014-03-10' '2013-07-05' '2013-09-16' '2013-05-25' '2013-03-11' '2014-10-20' '2014-07-19' '2013-01-31' '2015-04-11' '2014-12-13' '2014-08-17' '2014-09-28' '2015-01-23' '2014-02-26'
+ '2013-04-08' '2014-11-13' '2015-01-21' '2013-11-18' '2013-12-20' '2013-11-07' '2014-03-23' '2015-02-03' '2015-01-30' '2013-03-25' '2013-06-23' '2013-04-09' '2014-06-08' '2013-04-13' '2014-03-17'
+ '2013-06-02' '2013-10-11' '2013-09-09' '2013-07-18' '2015-01-15' '2013-06-13' '2015-04-17' '2013-08-08' '2014-10-04' '2014-02-25' '2013-09-27' '2014-06-03' '2014-10-03' '2013-01-02' '2013-07-03'
+ '2013-06-12' '2013-10-01' '2014-09-16' '2013-08-27' '2013-11-06' '2013-11-09' '2015-01-01' '2014-04-19' '2013-07-23' '2013-02-06' '2014-05-01' '2014-06-21' '2014-01-31' '2013-04-28' '2014-04-06'
+ '2013-09-26' '2015-02-07' '2013-11-05' '2014-11-04' '2014-06-10' '2013-11-23' '2014-08-21' '2014-11-07' '2013-12-15' '2014-01-21' '2013-11-20' '2014-11-14' '2014-05-05' '2015-04-24' '2014-08-19'
+ '2014-11-26' '2014-03-29' '2013-02-02' '2013-11-15' '2014-09-21' '2014-02-15' '2014-10-16' '2014-08-26' '2013-12-19' '2015-01-04' '2015-01-08' '2014-08-06' '2015-04-22' '2014-12-22' '2013-06-07'
+ '2014-02-08' '2013-02-25' '2013-09-28' '2013-03-09' '2013-09-18' '2013-02-12' '2013-03-18' '2014-04-08' '2013-01-08' '2014-04-29' '2013-05-06' '2013-07-10' '2013-07-17' '2013-05-16' '2014-09-23'
+ '2014-04-28' '2013-07-28' '2014-11-01' '2014-02-06' '2013-09-22' '2013-01-06' '2013-06-28' '2013-08-10' '2014-10-25' '2014-01-16' '2013-09-02' '2013-06-21' '2013-03-01' '2015-05-15' '2014-08-12'
+ '2014-06-23' '2014-02-23' '2013-10-05' '2013-02-23' '2013-12-17' '2014-04-10' '2014-01-09' '2014-07-27' '2013-10-30' '2014-04-12' '2014-05-26' '2014-04-23' '2013-12-02' '2014-06-01' '2013-08-15'
+ '2013-06-15' '2014-08-14' '2014-04-24' '2013-07-04' '2014-08-07' '2013-08-24' '2014-03-16' '2015-03-20' '2014-07-25' '2013-05-26' '2014-03-24' '2013-02-03' '2014-04-17' '2014-07-01' '2015-05-11'
+ '2013-01-23' '2015-03-19' '2015-03-28' '2015-03-04' '2014-11-02' '2014-09-04' '2014-04-11' '2014-11-25' '2013-06-22' '2013-03-22' '2013-10-27' '2015-01-12' '2014-03-03' '2013-11-22' '2013-06-08'
+ '2013-09-23' '2014-09-02' '2014-09-12' '2015-01-10' '2014-05-11' '2014-05-27' '2014-07-20' '2013-12-13' '2015-01-22' '2013-03-17' '2013-01-09' '2013-08-26' '2014-07-22' '2013-07-19' '2014-04-25'
+ '2013-06-16' '2014-01-04' '2014-07-23' '2014-07-13' '2013-04-20' '2013-12-18' '2014-03-01' '2013-02-19' '2013-02-20' '2013-11-21' '2013-03-10' '2014-02-10' '2013-04-23' '2014-05-28' '2013-08-18'
+ '2014-01-27' '2013-07-20' '2013-10-28' '2015-03-23' '2014-11-29' '2013-05-10' '2013-04-01' '2013-09-14' '2014-10-14' '2014-11-10' '2013-03-30' '2014-12-28' '2014-11-28' '2015-04-16' '2014-01-01'
+ '2014-12-05' '2014-12-14' '2014-04-21' '2013-03-14' '2013-05-18' '2013-04-24' '2015-02-01' '2013-04-29' '2015-04-18' '2014-10-21' '2013-09-21' '2013-11-04' '2014-12-11' '2014-07-09' '2014-07-07'
+ '2015-01-11' '2015-05-02' '2013-08-21' '2013-02-21' '2013-12-08' '2013-02-09' '2013-12-01' '2013-06-14' '2013-02-10' '2014-10-22' '2013-07-27' '2014-08-22' '2013-03-20' '2014-11-05' '2014-06-05'
+ '2014-02-18' '2014-08-24' '2013-01-16' '2014-12-29' '2013-01-15' '2015-04-23' '2013-07-21' '2013-03-08' '2014-10-10' '2014-01-03' '2013-05-23' '2014-08-15' '2014-12-24' '2014-03-22' '2014-08-28'
+ '2015-03-13' '2013-05-29' '2014-08-20' '2015-03-03' '2015-02-25' '2013-12-22' '2014-10-13' '2013-12-29' '2014-02-27' '2014-04-20' '2013-07-24' '2014-02-07' '2014-12-30' '2015-01-24' '2014-09-20'
+ '2014-11-20' '2015-01-19' '2014-12-17' '2014-08-05' '2014-05-31' '2014-06-16' '2013-07-01' '2013-12-11' '2013-11-30' '2015-01-18' '2013-08-03' '2015-05-10' '2013-01-27' '2015-02-02' '2014-01-19'
+ '2013-08-28' '2014-10-23' '2015-05-04' '2015-02-10' '2015-03-14' '2013-11-29' '2013-05-08' '2014-10-26' '2014-03-30' '2014-11-16' '2014-05-04' '2013-11-24' '2013-06-30' '2013-11-16' '2014-09-24'
+ '2013-12-23' '2013-01-24' '2014-12-27' '2015-03-24' '2013-02-17' '2013-06-27' '2014-03-02' '2015-01-20' '2014-09-07' '2014-09-01' '2015-05-01' '2013-11-03' '2014-07-03' '2013-01-01' '2013-10-13'
+ '2013-08-17' '2015-01-31' '2013-07-13' '2013-06-24' '2014-11-08' '2013-05-09' '2013-03-02' '2014-10-05' '2013-04-21' '2015-05-17' '2013-01-07' '2015-01-06' '2014-10-24' '2014-05-07' '2014-05-24'
+ '2013-02-28' '2013-07-30' '2015-04-30' '2013-02-01' '2013-08-19' '2015-02-16' '2015-03-22' '2015-03-06' '2014-08-30' '2014-12-06' '2013-08-02' '2014-09-30' '2014-10-07' '2014-06-15' '2013-03-16'
+ '2013-03-29' '2014-07-10' '2014-01-12' '2014-09-10' '2013-12-26' '2014-03-28' '2015-02-28' '2014-07-26' '2014-06-07' '2013-09-05' '2014-04-26' '2013-03-03' '2013-10-09' '2013-06-01' '2015-05-08'
+ '2014-07-06' '2013-02-22' '2013-01-10' '2013-10-12' '2014-01-24' '2013-08-04' '2013-05-04' '2014-05-10' '2013-05-31' '2015-03-01' '2013-04-07' '2013-09-01' '2013-04-18' '2014-08-16' '2013-12-12'
+ '2013-04-04' '2014-08-01' '2013-02-24' '2014-12-25' '2014-10-19' '2013-12-07' '2013-12-16' '2015-04-05' '2013-04-14' '2014-02-02' '2014-09-26' '2014-07-12' '2015-02-14' '2015-05-16' '2013-07-06'
+ '2015-04-12' '2014-12-21' '2014-11-23' '2014-10-18' '2013-01-12' '2014-11-27' '2013-01-13' '2014-02-09' '2014-05-17' '2013-09-08' '2014-07-04' '2013-07-07' '2014-02-28' '2013-11-17' '2013-10-20'
+ '2014-11-09' '2013-02-14' '2014-04-27' '2014-01-26' '2014-09-27' '2013-03-24' '2013-03-31' '2015-04-04' '2014-08-31' '2013-05-12' '2014-12-20' '2013-12-21' '2013-11-28']
+Field6               ['B' 'F' 'J' 'E' 'C' 'K' 'A' 'D']
 Field10              ['965' '548' '1,165' '1,487' '935' '564' '1,113' '1,480']
 Field12              ['N' 'Y']
 CoverageField8       ['T' 'Y' 'X' 'W' 'V' 'U' 'Z']
@@ -792,6 +1024,14 @@ GeographicField64    ['CA' 'NJ' 'TX' 'IL']
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>Field10</code> looks like integers stored as strings so convert to <code>int</code>s</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -799,8 +1039,7 @@ GeographicField64    ['CA' 'NJ' 'TX' 'IL']
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Field10 looks like integers stored as strings so convert to ints</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">'Field10'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Field10'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'Field10'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Field10'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
@@ -815,9 +1054,9 @@ GeographicField64    ['CA' 'NJ' 'TX' 'IL']
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
-Int64Index: 260753 entries, 1 to 434588
-Columns: 298 entries, Original_Quote_Date to GeographicField64
-dtypes: datetime64[ns](1), float64(6), int64(265), object(26)
+RangeIndex: 260753 entries, 0 to 260752
+Columns: 299 entries, QuoteNumber to GeographicField64
+dtypes: float64(6), int64(266), object(27)
 memory usage: 594.8+ MB
 </pre>
 </div>
@@ -829,6 +1068,14 @@ memory usage: 594.8+ MB
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Eecalculate breakdown now that we have changed dtype of <code>Field10</code></p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -836,8 +1083,7 @@ memory usage: 594.8+ MB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># recalculate breakdown now that we have changed dtype of Field10</span>
-<span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dct_fields_by_dtype</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">):</span>
     <span class="n">dct_fields_by_dtype</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
@@ -852,7 +1098,7 @@ memory usage: 594.8+ MB
 </div>
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"16e3a636035347aaa77254f120c9d34f": {"model_module": "@jupyter-widgets/controls", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "3661454ba9bb4468ba4fc22f488819d6": {"model_module": "@jupyter-widgets/controls", "model_name": "FileUploadModel", "state": {"_counter": 1, "_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FileUploadModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FileUploadView", "accept": "", "button_style": "", "data": [null], "description": "kaggle.json", "description_tooltip": null, "disabled": false, "error": "", "icon": "upload", "layout": "IPY_MODEL_cfc6f6281932403ca570b23bca591325", "metadata": [{"lastModified": 1623143484266, "name": "kaggle.json", "size": 68, "type": "application/json"}], "multiple": false, "style": "IPY_MODEL_16e3a636035347aaa77254f120c9d34f"}}, "cfc6f6281932403ca570b23bca591325": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}
+{"ecf0017fcc8843faacbf7cc08c1c55b3": {"model_module": "@jupyter-widgets/controls", "model_name": "FileUploadModel", "state": {"_view_name": "FileUploadView", "_counter": 1, "style": "IPY_MODEL_0c47f3cfe4f446c3895847451bd5ad38", "_dom_classes": [], "description": "kaggle.json", "multiple": false, "_model_name": "FileUploadModel", "data": [null], "button_style": "", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "accept": "", "_view_count": null, "disabled": false, "_view_module_version": "1.5.0", "error": "", "description_tooltip": null, "metadata": [{"name": "kaggle.json", "type": "application/json", "size": 65, "lastModified": 1624024865049}], "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_e4dd26ead8e946e488f667a04978bf4f", "icon": "upload"}}, "0c47f3cfe4f446c3895847451bd5ad38": {"model_module": "@jupyter-widgets/controls", "model_name": "ButtonStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ButtonStyleModel", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "button_color": null, "font_weight": "", "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "e4dd26ead8e946e488f667a04978bf4f": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
 </script>
 
 
