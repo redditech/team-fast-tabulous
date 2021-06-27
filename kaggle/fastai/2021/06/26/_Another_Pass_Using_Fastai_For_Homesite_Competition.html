@@ -177,7 +177,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">Uqq</span> <span class="n">fastai</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -Uqq fastai
 </pre></div>
 
     </div>
@@ -194,7 +194,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.tabular.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.tabular.all</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
     </div>
@@ -219,7 +219,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="k">global</span> <span class="n">gdrive</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">global</span> <span class="n">gdrive</span>
 <span class="n">gdrive</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'/content/gdrive/My Drive'</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">gdrive</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">gdrive</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
@@ -249,7 +249,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
@@ -266,7 +266,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">ls</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">gdrive</span><span class="o">/</span><span class="n">MyDrive</span><span class="o">/</span><span class="n">Kaggle</span><span class="o">/</span><span class="n">kaggle</span><span class="o">.</span><span class="n">json</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls /content/gdrive/MyDrive/Kaggle/kaggle.json
 </pre></div>
 
     </div>
@@ -311,7 +311,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -353,9 +353,9 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/.</span><span class="n">kaggle</span>
-<span class="err">!</span><span class="n">cp</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">gdrive</span><span class="o">/</span><span class="n">MyDrive</span><span class="o">/</span><span class="n">Kaggle</span><span class="o">/</span><span class="n">kaggle</span><span class="o">.</span><span class="n">json</span> <span class="o">~/.</span><span class="n">kaggle</span><span class="o">/</span>
-<span class="err">!</span><span class="n">chmod</span> <span class="mi">600</span> <span class="o">~/.</span><span class="n">kaggle</span><span class="o">/</span><span class="n">kaggle</span><span class="o">.</span><span class="n">json</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>mkdir -p ~/.kaggle
+<span class="o">!</span>cp /content/gdrive/MyDrive/Kaggle/kaggle.json ~/.kaggle/
+<span class="o">!</span>chmod <span class="m">600</span> ~/.kaggle/kaggle.json
 </pre></div>
 
     </div>
@@ -372,7 +372,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">kaggle</span> <span class="kn">import</span> <span class="n">api</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">kaggle</span> <span class="kn">import</span> <span class="n">api</span>
 </pre></div>
 
     </div>
@@ -389,7 +389,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
 <span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
 </pre></div>
 
@@ -423,7 +423,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s2">"gdrive/MyDrive/Kaggle/homesite_data"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s2">"gdrive/MyDrive/Kaggle/homesite_data"</span>
 <span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">Path</span><span class="o">.</span><span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">path</span>
 <span class="n">api</span><span class="o">.</span><span class="n">competition_download_cli</span><span class="p">(</span><span class="s1">'homesite-quote-conversion'</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
@@ -460,7 +460,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">path</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span>
 </pre></div>
 
     </div>
@@ -493,7 +493,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -543,7 +543,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> 
 <span class="n">bs</span> <span class="o">=</span> <span class="mi">1024</span>
 <span class="n">val_bs</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.25</span>
@@ -566,7 +566,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"train.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -1124,7 +1124,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
     </div>
@@ -1157,7 +1157,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">df_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -1715,7 +1715,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_test</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
     </div>
@@ -1748,7 +1748,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">y_column</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">df_test</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_column</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">df_test</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1765,7 +1765,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">y_column</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_column</span>
 </pre></div>
 
     </div>
@@ -1806,7 +1806,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1839,7 +1839,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -1872,7 +1872,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -1913,7 +1913,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">'boolean'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">'boolean'</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1938,7 +1938,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -1975,7 +1975,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">train_data_balance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s2">"QuoteConversion_Flag"</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"QuoteConversion_Flag"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_data_balance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s2">"QuoteConversion_Flag"</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"QuoteConversion_Flag"</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1992,7 +1992,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">train_data_balance</span><span class="p">[</span><span class="s2">"QuoteConversion_Flag"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_data_balance</span><span class="p">[</span><span class="s2">"QuoteConversion_Flag"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -2098,7 +2098,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'QuoteNumber'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'QuoteNumber'</span><span class="p">)</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'QuoteNumber'</span><span class="p">)</span>
 </pre></div>
 
@@ -2124,7 +2124,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -2157,7 +2157,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">])</span>
 <span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">])</span>
 </pre></div>
 
@@ -2183,7 +2183,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">add_datepart</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">'Original_Quote_Date'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">add_datepart</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">'Original_Quote_Date'</span><span class="p">)</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">add_datepart</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="s1">'Original_Quote_Date'</span><span class="p">)</span>
 </pre></div>
 
@@ -2210,7 +2210,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">y_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_column</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_column</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 <span class="n">y_names</span>
 </pre></div>
 
@@ -2244,7 +2244,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">cont_cat_split</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">dep_var</span><span class="o">=</span><span class="n">y_names</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cont_names</span><span class="p">,</span> <span class="n">cat_names</span> <span class="o">=</span> <span class="n">cont_cat_split</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">dep_var</span><span class="o">=</span><span class="n">y_names</span><span class="p">)</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">cont_names</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_names</span><span class="p">)</span>
 </pre></div>
 
@@ -2286,7 +2286,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="s1">'Field8'</span> <span class="ow">in</span> <span class="n">cont_names</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s1">'Field8'</span> <span class="ow">in</span> <span class="n">cont_names</span>
 </pre></div>
 
     </div>
@@ -2319,7 +2319,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="s1">'Field9'</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">,</span> <span class="s1">'Field9'</span> <span class="ow">in</span> <span class="n">cont_names</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s1">'Field9'</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">,</span> <span class="s1">'Field9'</span> <span class="ow">in</span> <span class="n">cont_names</span>
 </pre></div>
 
     </div>
@@ -2352,7 +2352,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">field9_categories</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field9'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">field9_categories</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field9'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field9'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field9'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'category'</span><span class="p">)</span>
 <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field9'</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">(</span><span class="n">field9_categories</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -2371,7 +2371,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'Field9'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'Field9'</span><span class="p">)</span>
 <span class="n">cat_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Field9'</span><span class="p">)</span>
 </pre></div>
 
@@ -2389,7 +2389,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="s1">'Field11'</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">,</span> <span class="s1">'Field11'</span> <span class="ow">in</span> <span class="n">cont_names</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s1">'Field11'</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">,</span> <span class="s1">'Field11'</span> <span class="ow">in</span> <span class="n">cont_names</span>
 </pre></div>
 
     </div>
@@ -2422,7 +2422,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">field11_categories</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field11'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">field11_categories</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field11'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field11'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field11'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'category'</span><span class="p">)</span>
 <span class="n">df_train</span><span class="p">[</span><span class="s1">'Field11'</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">(</span><span class="n">field11_categories</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -2441,7 +2441,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'Field11'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'Field11'</span><span class="p">)</span>
 <span class="n">cat_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Field11'</span><span class="p">)</span>
 </pre></div>
 
@@ -2459,7 +2459,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="s1">'PropertyField25'</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">,</span> <span class="s1">'PropertyField25'</span> <span class="ow">in</span> <span class="n">cont_names</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s1">'PropertyField25'</span> <span class="ow">in</span> <span class="n">cat_names</span><span class="p">,</span> <span class="s1">'PropertyField25'</span> <span class="ow">in</span> <span class="n">cont_names</span>
 </pre></div>
 
     </div>
@@ -2492,7 +2492,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">propertyfield25_categories</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'PropertyField25'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">propertyfield25_categories</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'PropertyField25'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 <span class="n">df_train</span><span class="p">[</span><span class="s1">'PropertyField25'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'PropertyField25'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'category'</span><span class="p">)</span>
 <span class="n">df_train</span><span class="p">[</span><span class="s1">'PropertyField25'</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">(</span><span class="n">propertyfield25_categories</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -2511,7 +2511,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'PropertyField25'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'PropertyField25'</span><span class="p">)</span>
 <span class="n">cat_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'PropertyField25'</span><span class="p">)</span>
 </pre></div>
 
@@ -2529,7 +2529,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'PropertyField29'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'PropertyField29'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'PersonalField84'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
@@ -2547,7 +2547,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'PersonalField84'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'PersonalField84'</span><span class="p">)</span>
 <span class="n">cont_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'PropertyField29'</span><span class="p">)</span>
 </pre></div>
 
@@ -2565,7 +2565,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="s2">"QuoteConversion_Flag"</span> <span class="ow">in</span> <span class="n">cont_names</span><span class="p">,</span> <span class="s2">"QuoteConversion_Flag"</span> <span class="ow">in</span> <span class="n">cat_names</span> <span class="c1">#Make sure we've gotten our y-column excluded</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"QuoteConversion_Flag"</span> <span class="ow">in</span> <span class="n">cont_names</span><span class="p">,</span> <span class="s2">"QuoteConversion_Flag"</span> <span class="ow">in</span> <span class="n">cat_names</span> <span class="c1">#Make sure we've gotten our y-column excluded</span>
 </pre></div>
 
     </div>
@@ -2598,7 +2598,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Categorify</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Normalize</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Categorify</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">,</span> <span class="n">Normalize</span><span class="p">]</span>
 <span class="n">splits</span> <span class="o">=</span> <span class="n">TrainTestSplitter</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">y_names</span><span class="p">])(</span><span class="n">df_train</span><span class="p">)</span>
 </pre></div>
 
@@ -2616,7 +2616,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">to</span> <span class="o">=</span> <span class="n">TabularPandas</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">procs</span><span class="o">=</span><span class="n">procs</span><span class="p">,</span> <span class="n">cat_names</span><span class="o">=</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">cont_names</span><span class="o">=</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">y_names</span><span class="o">=</span><span class="n">y_names</span><span class="p">,</span><span class="n">splits</span><span class="o">=</span><span class="n">splits</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">to</span> <span class="o">=</span> <span class="n">TabularPandas</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">procs</span><span class="o">=</span><span class="n">procs</span><span class="p">,</span> <span class="n">cat_names</span><span class="o">=</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">cont_names</span><span class="o">=</span><span class="n">cont_names</span><span class="p">,</span> <span class="n">y_names</span><span class="o">=</span><span class="n">y_names</span><span class="p">,</span><span class="n">splits</span><span class="o">=</span><span class="n">splits</span><span class="p">)</span>
 <span class="n">dls</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span> <span class="n">val_bs</span><span class="o">=</span><span class="n">val_bs</span><span class="p">)</span>
 <span class="n">dls</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">show_batch</span><span class="p">()</span>
 </pre></div>
@@ -6076,7 +6076,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">dls</span><span class="o">.</span><span class="n">train</span><span class="p">)</span><span class="o">*</span><span class="mi">512</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dls</span><span class="o">.</span><span class="n">valid</span><span class="p">)</span><span class="o">*</span><span class="mi">128</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">dls</span><span class="o">.</span><span class="n">train</span><span class="p">)</span><span class="o">*</span><span class="mi">512</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dls</span><span class="o">.</span><span class="n">valid</span><span class="p">)</span><span class="o">*</span><span class="mi">128</span>
 </pre></div>
 
     </div>
@@ -6109,7 +6109,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">roc_auc_binary</span> <span class="o">=</span> <span class="n">RocAucBinary</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">roc_auc_binary</span> <span class="o">=</span> <span class="n">RocAucBinary</span><span class="p">()</span>
 <span class="n">learn</span> <span class="o">=</span> <span class="n">tabular_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">roc_auc_binary</span><span class="p">)</span>
 </pre></div>
 
@@ -6127,7 +6127,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">roc_auc_binary</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">roc_auc_binary</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -6160,7 +6160,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">lr_find</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">lr_find</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -6230,7 +6230,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">wd</span><span class="o">=</span><span class="n">wd</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">wd</span><span class="o">=</span><span class="n">wd</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -6331,7 +6331,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">get_preds</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">get_preds</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -6363,7 +6363,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -6404,7 +6404,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -6437,7 +6437,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -6470,7 +6470,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
 <span class="n">valid_score</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">to_np</span><span class="p">(</span><span class="n">targs</span><span class="p">),</span> <span class="n">to_np</span><span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]))</span>
 <span class="n">valid_score</span>
 </pre></div>
@@ -6513,7 +6513,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">dl_test</span> <span class="o">=</span> <span class="n">dls</span><span class="o">.</span><span class="n">test_dl</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dl_test</span> <span class="o">=</span> <span class="n">dls</span><span class="o">.</span><span class="n">test_dl</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -6530,7 +6530,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">dl</span><span class="o">=</span><span class="n">dl_test</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">dl</span><span class="o">=</span><span class="n">dl_test</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -6562,7 +6562,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -6604,7 +6604,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -6637,7 +6637,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">file_extract</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"sample_submission.csv.zip"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_extract</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"sample_submission.csv.zip"</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -6654,7 +6654,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -6687,7 +6687,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"sample_submission.csv"</span><span class="p">)</span> <span class="c1">#I could add `low_memory=false` but it makes things slower</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"sample_submission.csv"</span><span class="p">)</span> <span class="c1">#I could add `low_memory=false` but it makes things slower</span>
 <span class="n">df_submission</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -6770,7 +6770,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_submission</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_submission</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -6852,7 +6852,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">df_test</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">df_test</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -6885,7 +6885,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -6918,7 +6918,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds</span><span class="o">.</span><span class="n">dtype</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 
     </div>
@@ -6951,7 +6951,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -6984,7 +6984,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds</span><span class="p">[:</span><span class="mi">1</span><span class="p">][:</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds</span><span class="p">[:</span><span class="mi">1</span><span class="p">][:</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -7025,7 +7025,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds</span><span class="p">[:</span><span class="mi">1</span><span class="p">][:</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds</span><span class="p">[:</span><span class="mi">1</span><span class="p">][:</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -7058,7 +7058,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">preds_for_submission</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preds_for_submission</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> 
 <span class="n">preds_for_submission</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 
@@ -7092,7 +7092,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">fpfs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">pfs</span><span class="p">)</span> <span class="k">for</span> <span class="n">pfs</span> <span class="ow">in</span> <span class="n">preds_for_submission</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fpfs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">pfs</span><span class="p">)</span> <span class="k">for</span> <span class="n">pfs</span> <span class="ow">in</span> <span class="n">preds_for_submission</span><span class="p">]</span>
 <span class="n">fpfs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 
@@ -7126,7 +7126,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">integers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">integers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
 
 <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">integer</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">integer</span> <span class="ow">in</span> <span class="n">integers</span><span class="p">]</span>
 <span class="n">strings</span>
@@ -7162,7 +7162,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'QuoteNumber'</span><span class="p">:</span> <span class="n">df_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s1">'QuoteConversion_Flag'</span><span class="p">:</span> <span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()},</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'QuoteNumber'</span><span class="p">,</span> <span class="s1">'QuoteConversion_Flag'</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'QuoteNumber'</span><span class="p">:</span> <span class="n">df_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s1">'QuoteConversion_Flag'</span><span class="p">:</span> <span class="n">preds</span><span class="p">[:][:][:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()},</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'QuoteNumber'</span><span class="p">,</span> <span class="s1">'QuoteConversion_Flag'</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -7187,7 +7187,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -7220,7 +7220,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -7253,7 +7253,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -7294,7 +7294,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">qcf</span><span class="p">)</span> <span class="k">for</span> <span class="n">qcf</span> <span class="ow">in</span> <span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">qcf</span><span class="p">)</span> <span class="k">for</span> <span class="n">qcf</span> <span class="ow">in</span> <span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -7311,7 +7311,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -7393,7 +7393,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'Int64'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'Int64'</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -7410,7 +7410,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -7492,7 +7492,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">submission</span><span class="p">[</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">==</span><span class="mi">1</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">submission</span><span class="p">[</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">==</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -7525,7 +7525,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">submission</span><span class="p">[</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">==</span><span class="mi">0</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">submission</span><span class="p">[</span><span class="n">submission</span><span class="o">.</span><span class="n">QuoteConversion_Flag</span><span class="o">==</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -7558,7 +7558,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">'submission11.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">submission</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">'submission11.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -7575,7 +7575,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">competition_submit</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">'submission11.csv'</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s2">"Tenth pass"</span><span class="p">,</span> <span class="n">competition</span><span class="o">=</span><span class="s1">'homesite-quote-conversion'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">competition_submit</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">'submission11.csv'</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s2">"Tenth pass"</span><span class="p">,</span> <span class="n">competition</span><span class="o">=</span><span class="s1">'homesite-quote-conversion'</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -7616,7 +7616,7 @@ Name: QuoteConversion_Flag, dtype: object</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'homesite_fastai_nn11'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'homesite_fastai_nn11'</span><span class="p">)</span>
 </pre></div>
 
     </div>
