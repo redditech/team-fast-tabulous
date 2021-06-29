@@ -11,14 +11,14 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Here I improve on fastai’s cont_cat_split function and add some changes to the defaults to make another submission to Kaggle for the Homesite competition." />
 <meta property="og:description" content="Here I improve on fastai’s cont_cat_split function and add some changes to the defaults to make another submission to Kaggle for the Homesite competition." />
-<link rel="canonical" href="https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices.html" />
-<meta property="og:url" content="https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices.html" />
+<link rel="canonical" href="https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices-Copy1.html" />
+<meta property="og:url" content="https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices-Copy1.html" />
 <meta property="og:site_name" content="Team Fast-Tabulous!" />
 <meta property="og:image" content="https://redditech.github.io/team-fast-tabulous/images/chart-preview.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-06-27T00:00:00-05:00" />
 <script type="application/ld+json">
-{"url":"https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices.html","@type":"BlogPosting","headline":"Improving cont_cat_split in Fastai Tabular For Homesite Competition","dateModified":"2021-06-27T00:00:00-05:00","datePublished":"2021-06-27T00:00:00-05:00","image":"https://redditech.github.io/team-fast-tabulous/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices.html"},"author":{"@type":"Person","name":"Nissan Dookeran"},"description":"Here I improve on fastai’s cont_cat_split function and add some changes to the defaults to make another submission to Kaggle for the Homesite competition.","@context":"https://schema.org"}</script>
+{"url":"https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices-Copy1.html","@type":"BlogPosting","headline":"Improving cont_cat_split in Fastai Tabular For Homesite Competition","dateModified":"2021-06-27T00:00:00-05:00","datePublished":"2021-06-27T00:00:00-05:00","image":"https://redditech.github.io/team-fast-tabulous/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices-Copy1.html"},"author":{"@type":"Person","name":"Nissan Dookeran"},"description":"Here I improve on fastai’s cont_cat_split function and add some changes to the defaults to make another submission to Kaggle for the Homesite competition.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/team-fast-tabulous/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://redditech.github.io/team-fast-tabulous/feed.xml" title="Team Fast-Tabulous!" /><link rel="shortcut icon" type="image/x-icon" href="/team-fast-tabulous/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -81,7 +81,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      38 min read
+      37 min read
     
 </span></p>
 
@@ -102,19 +102,19 @@ window.onload = wrap_img;
         <div class="pb-5 d-flex flex-wrap flex-justify-end">
           <div class="px-2">
 
-    <a href="https://github.com/redditech/team-fast-tabulous/tree/master/_notebooks/2021-06-27-Improving-Fastai-split-choices.ipynb" role="button" target="_blank">
+    <a href="https://github.com/redditech/team-fast-tabulous/tree/master/_notebooks/2021-06-27-Improving-Fastai-split-choices-Copy1.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/redditech/team-fast-tabulous/master?filepath=_notebooks%2F2021-06-27-Improving-Fastai-split-choices.ipynb" target="_blank">
+    <a href="https://mybinder.org/v2/gh/redditech/team-fast-tabulous/master?filepath=_notebooks%2F2021-06-27-Improving-Fastai-split-choices-Copy1.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://colab.research.google.com/github/redditech/team-fast-tabulous/blob/master/_notebooks/2021-06-27-Improving-Fastai-split-choices.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/redditech/team-fast-tabulous/blob/master/_notebooks/2021-06-27-Improving-Fastai-split-choices-Copy1.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
@@ -151,7 +151,7 @@ window.onload = wrap_img;
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
-# file to edit: _notebooks/2021-06-27-Improving-Fastai-split-choices.ipynb
+# file to edit: _notebooks/2021-06-27-Improving-Fastai-split-choices-Copy1.ipynb
 -->
 
 <div class="container" id="notebook-container">
@@ -533,15 +533,12 @@ window.onload = wrap_img;
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-4-4e20bcf9cc48&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>path<span class="ansi-blue-fg">.</span>ls<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-red-fg">NameError</span>: name 'path' is not defined</pre>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(#20) [Path('homesite-quote-conversion.zip'),Path('models'),Path('submission.csv'),Path('submission2.csv'),Path('submission3.csv'),Path('submission4.csv'),Path('submission5.csv'),Path('submission6.csv'),Path('submission7.csv'),Path('submission8.csv')...]</pre>
 </div>
+
 </div>
 
 </div>
@@ -8263,7 +8260,7 @@ Name: PersonalField7, dtype: int64</pre>
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices.html" hidden></a>
+</script><a class="u-url" href="/team-fast-tabulous/kaggle/fastai/2021/06/27/Improving-Fastai-split-choices-Copy1.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
