@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Load pickled model and convert quote to successful | Team Fast-Tabulous!</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Load pickled model and convert quote to successful" />
+<meta name="author" content="Tim Cummings" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This notebook loads a previously trained model and uses it to predict quote success rate. Then any quote can be chosen (from train or test) and a sensitivity analysis will determine which fields can be changed to turnaround quote success." />
+<meta property="og:description" content="This notebook loads a previously trained model and uses it to predict quote success rate. Then any quote can be chosen (from train or test) and a sensitivity analysis will determine which fields can be changed to turnaround quote success." />
+<link rel="canonical" href="https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/12/Sensitivity-Analysis-On-Pickled-Models.html" />
+<meta property="og:url" content="https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/12/Sensitivity-Analysis-On-Pickled-Models.html" />
+<meta property="og:site_name" content="Team Fast-Tabulous!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-12T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/12/Sensitivity-Analysis-On-Pickled-Models.html","@type":"BlogPosting","headline":"Load pickled model and convert quote to successful","dateModified":"2021-07-12T00:00:00-05:00","datePublished":"2021-07-12T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/12/Sensitivity-Analysis-On-Pickled-Models.html"},"author":{"@type":"Person","name":"Tim Cummings"},"description":"This notebook loads a previously trained model and uses it to predict quote success rate. Then any quote can be chosen (from train or test) and a sensitivity analysis will determine which fields can be changed to turnaround quote success.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/team-fast-tabulous/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://redditech.github.io/team-fast-tabulous/feed.xml" title="Team Fast-Tabulous!" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MHGYW30ZCF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MHGYW30ZCF');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/team-fast-tabulous/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/team-fast-tabulous/">Team Fast-Tabulous!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/team-fast-tabulous/about/">About Us</a><a class="page-link" href="/team-fast-tabulous/search/">Search</a><a class="page-link" href="/team-fast-tabulous/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Load pickled model and convert quote to successful</h1><p class="page-description">This notebook loads a previously trained model and uses it to predict quote success rate. Then any quote can be chosen (from train or test) and a sensitivity analysis will determine which fields can be changed to turnaround quote success.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-07-12T00:00:00-05:00" itemprop="datePublished">
+        Jul 12, 2021
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Tim Cummings</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      11 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/team-fast-tabulous/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/redditech/team-fast-tabulous/tree/master/_notebooks/2021-07-12-Sensitivity-Analysis-On-Pickled-Models.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/redditech/team-fast-tabulous/master?filepath=_notebooks%2F2021-07-12-Sensitivity-Analysis-On-Pickled-Models.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/redditech/team-fast-tabulous/blob/master/_notebooks/2021-07-12-Sensitivity-Analysis-On-Pickled-Models.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Set-up">Set up </a></li>
+<li class="toc-entry toc-h2"><a href="#Load-Deep-Learning-model">Load Deep Learning model </a></li>
+<li class="toc-entry toc-h2"><a href="#Load-XGBoost-model-(optional)">Load XGBoost model (optional) </a></li>
+<li class="toc-entry toc-h2"><a href="#Create-a-DataFrame-of-all-quotes,-train-and-test">Create a DataFrame of all quotes, train and test </a></li>
+<li class="toc-entry toc-h2"><a href="#Create-a-sensitivity-analysis-tool">Create a sensitivity analysis tool </a></li>
+<li class="toc-entry toc-h1"><a href="#Use-the-sensitivity-tool">Use the sensitivity tool </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-07-12-Sensitivity-Analysis-On-Pickled-Models.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">fastai.tabular.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default='warn'</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="kn">from</span> <span class="nn">IPython.utils</span> <span class="kn">import</span> <span class="n">io</span>  <span class="c1"># using io.capture_output</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Set-up">
+<a class="anchor" href="#Set-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set up<a class="anchor-link" href="#Set-up"> </a>
+</h2>
+<p>Specify the folder which contains the original kaggle data (train.csv and test.csv) and the trained model (learn_0708.pkl)</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'data/homesite-quote'</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"load_pickled_model"</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Load-Deep-Learning-model">
+<a class="anchor" href="#Load-Deep-Learning-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load Deep Learning model<a class="anchor-link" href="#Load-Deep-Learning-model"> </a>
+</h2>
+<p>I created my pickled deep learning model using notebook <a href="https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/07/08/HomeSite-Quote-A-Fastai-Tabular-Approach.html">https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/07/08/HomeSite-Quote-A-Fastai-Tabular-Approach.html</a> and in the deep learning model section after cell</p>
+
+<pre><code>dl_roc_auc_score=roc_auc_score(to_np(targs), to_np(preds[:,1]))
+
+</code></pre>
+<p>I ran the command</p>
+
+<pre><code>save_pickle(path/"learn_0708.pkl", learn)
+
+</code></pre>
+<p>Now I can load that pickle into this notebook and check it gives the same dl_roc_auc_score which should be 0.963051</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trained_dl_pkl</span> <span class="o">=</span> <span class="s2">"learn_0708.pkl"</span>
+<span class="n">learn</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="n">trained_dl_pkl</span><span class="p">)</span>
+<span class="n">preds</span><span class="p">,</span> <span class="n">targs</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">get_preds</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Trained deep learning model </span><span class="si">{</span><span class="n">trained_dl_pkl</span><span class="si">}</span><span class="s2"> has a roc_auc_score of </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">to_np</span><span class="p">(</span><span class="n">targs</span><span class="p">),</span> <span class="n">to_np</span><span class="p">(</span><span class="n">preds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trained deep learning model learn_0708.pkl has a roc_auc_score of 0.9630509268687871
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Load-XGBoost-model-(optional)">
+<a class="anchor" href="#Load-XGBoost-model-(optional)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load XGBoost model (optional)<a class="anchor-link" href="#Load-XGBoost-model-(optional)"> </a>
+</h2>
+<p>I created my pickled xgboost model using notebook <a href="https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/07/08/HomeSite-Quote-A-Fastai-Tabular-Approach.html">https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/07/08/HomeSite-Quote-A-Fastai-Tabular-Approach.html</a> and in the XGBoost model section after cell</p>
+
+<pre><code>plot_importance(xgb_model, height=1,max_num_features=20,)
+
+</code></pre>
+<p>I ran the commands</p>
+
+<pre><code>save_pickle(path/"to_0708.pkl", to)
+save_pickle(path/"xgb_model_0708.pkl", xgb_model)
+
+</code></pre>
+<p>Now I can load those pickles into this notebook and check it gives the same xg_roc_auc_score which should be 0.964158</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">to</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s2">"to_0708.pkl"</span><span class="p">)</span>
+<span class="n">trained_xgb_pkl</span> <span class="o">=</span> <span class="s2">"xgb_model_0708.pkl"</span>
+<span class="n">xgb_model</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="n">trained_xgb_pkl</span><span class="p">)</span>
+<span class="n">xgb_preds</span> <span class="o">=</span> <span class="n">xgb_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">to</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">xs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Trained XGBoost model </span><span class="si">{</span><span class="n">trained_xgb_pkl</span><span class="si">}</span><span class="s2"> has a roc_auc_score of </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">to</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">ys</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">xgb_preds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trained XGBoost model xgb_model_0708.pkl has a roc_auc_score of 0.9641575675307634
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-a-DataFrame-of-all-quotes,-train-and-test">
+<a class="anchor" href="#Create-a-DataFrame-of-all-quotes,-train-and-test" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a DataFrame of all quotes, train and test<a class="anchor-link" href="#Create-a-DataFrame-of-all-quotes,-train-and-test"> </a>
+</h2>
+<p>I want all quotes so I can call up any quote number. We have finished training so doesn't matter whether in train or test. We save the actual conversion flags from train in sr_conv for later reference.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">'train.csv'</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"QuoteNumber"</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">'test.csv'</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">'Original_Quote_Date'</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"QuoteNumber"</span><span class="p">)</span>
+<span class="n">sr_conv</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">'QuoteConversion_Flag'</span><span class="p">]</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'QuoteConversion_Flag'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">add_datepart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">'Original_Quote_Date'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">df_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">df_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">sr_conv</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(434589, 309) (260753, 297) (173836, 297) (260753,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looking at actual conversion flags we can see a few which were successful, eg 25, 26, 32, 47</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sr_conv</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>QuoteNumber
+1     0
+2     0
+4     0
+6     0
+8     0
+12    0
+13    0
+14    0
+18    0
+19    0
+20    0
+22    0
+25    1
+26    1
+28    0
+29    0
+30    0
+32    1
+35    0
+37    0
+38    0
+40    0
+41    0
+44    0
+45    0
+47    1
+50    0
+51    0
+53    0
+57    0
+Name: QuoteConversion_Flag, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looking at sorted df we can see all quote numbers are represented, at least in the first 30 ;)</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Field6</th>
+      <th>Field7</th>
+      <th>Field8</th>
+      <th>Field9</th>
+      <th>Field10</th>
+      <th>Field11</th>
+      <th>Field12</th>
+      <th>CoverageField1A</th>
+      <th>CoverageField1B</th>
+      <th>CoverageField2A</th>
+      <th>...</th>
+      <th>Original_Quote_Day</th>
+      <th>Original_Quote_Dayofweek</th>
+      <th>Original_Quote_Dayofyear</th>
+      <th>Original_Quote_Is_month_end</th>
+      <th>Original_Quote_Is_month_start</th>
+      <th>Original_Quote_Is_quarter_end</th>
+      <th>Original_Quote_Is_quarter_start</th>
+      <th>Original_Quote_Is_year_end</th>
+      <th>Original_Quote_Is_year_start</th>
+      <th>Original_Quote_Elapsed</th>
+    </tr>
+    <tr>
+      <th>QuoteNumber</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>23</td>
+      <td>0.9403</td>
+      <td>0.0006</td>
+      <td>965</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>17</td>
+      <td>23</td>
+      <td>17</td>
+      <td>...</td>
+      <td>16</td>
+      <td>4</td>
+      <td>228</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.376611e+09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>F</td>
+      <td>7</td>
+      <td>1.0006</td>
+      <td>0.0040</td>
+      <td>548</td>
+      <td>1.2433</td>
+      <td>N</td>
+      <td>6</td>
+      <td>8</td>
+      <td>6</td>
+      <td>...</td>
+      <td>22</td>
+      <td>1</td>
+      <td>112</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.398125e+09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>E</td>
+      <td>16</td>
+      <td>0.9364</td>
+      <td>0.0006</td>
+      <td>1,487</td>
+      <td>1.3045</td>
+      <td>N</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>...</td>
+      <td>12</td>
+      <td>1</td>
+      <td>224</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.407802e+09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>F</td>
+      <td>7</td>
+      <td>1.0006</td>
+      <td>0.0040</td>
+      <td>548</td>
+      <td>1.2433</td>
+      <td>N</td>
+      <td>7</td>
+      <td>12</td>
+      <td>7</td>
+      <td>...</td>
+      <td>25</td>
+      <td>0</td>
+      <td>237</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.408925e+09</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>F</td>
+      <td>11</td>
+      <td>0.9919</td>
+      <td>0.0038</td>
+      <td>564</td>
+      <td>1.1886</td>
+      <td>N</td>
+      <td>8</td>
+      <td>14</td>
+      <td>8</td>
+      <td>...</td>
+      <td>7</td>
+      <td>5</td>
+      <td>250</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.378512e+09</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>J</td>
+      <td>10</td>
+      <td>0.9769</td>
+      <td>0.0004</td>
+      <td>1,165</td>
+      <td>1.2665</td>
+      <td>N</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>...</td>
+      <td>15</td>
+      <td>0</td>
+      <td>105</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.365984e+09</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>F</td>
+      <td>15</td>
+      <td>0.8945</td>
+      <td>0.0038</td>
+      <td>564</td>
+      <td>1.0670</td>
+      <td>N</td>
+      <td>11</td>
+      <td>18</td>
+      <td>11</td>
+      <td>...</td>
+      <td>29</td>
+      <td>4</td>
+      <td>88</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.364515e+09</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>E</td>
+      <td>23</td>
+      <td>0.9472</td>
+      <td>0.0006</td>
+      <td>1,487</td>
+      <td>1.3045</td>
+      <td>N</td>
+      <td>8</td>
+      <td>13</td>
+      <td>8</td>
+      <td>...</td>
+      <td>25</td>
+      <td>5</td>
+      <td>25</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.390608e+09</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>K</td>
+      <td>21</td>
+      <td>0.8870</td>
+      <td>0.0004</td>
+      <td>1,113</td>
+      <td>1.2665</td>
+      <td>Y</td>
+      <td>14</td>
+      <td>22</td>
+      <td>15</td>
+      <td>...</td>
+      <td>21</td>
+      <td>5</td>
+      <td>80</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.426896e+09</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>B</td>
+      <td>25</td>
+      <td>0.9153</td>
+      <td>0.0007</td>
+      <td>935</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>4</td>
+      <td>5</td>
+      <td>4</td>
+      <td>...</td>
+      <td>10</td>
+      <td>2</td>
+      <td>344</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.418170e+09</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>B</td>
+      <td>24</td>
+      <td>0.9403</td>
+      <td>0.0006</td>
+      <td>965</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>11</td>
+      <td>18</td>
+      <td>11</td>
+      <td>...</td>
+      <td>19</td>
+      <td>4</td>
+      <td>200</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.374192e+09</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>E</td>
+      <td>14</td>
+      <td>0.9472</td>
+      <td>0.0006</td>
+      <td>1,487</td>
+      <td>1.3045</td>
+      <td>N</td>
+      <td>13</td>
+      <td>20</td>
+      <td>13</td>
+      <td>...</td>
+      <td>18</td>
+      <td>5</td>
+      <td>18</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.390003e+09</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>J</td>
+      <td>23</td>
+      <td>0.9258</td>
+      <td>0.0004</td>
+      <td>1,165</td>
+      <td>1.2665</td>
+      <td>N</td>
+      <td>16</td>
+      <td>23</td>
+      <td>17</td>
+      <td>...</td>
+      <td>1</td>
+      <td>4</td>
+      <td>305</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.383264e+09</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>B</td>
+      <td>25</td>
+      <td>0.9153</td>
+      <td>0.0007</td>
+      <td>935</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>5</td>
+      <td>8</td>
+      <td>5</td>
+      <td>...</td>
+      <td>14</td>
+      <td>2</td>
+      <td>134</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.400026e+09</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>E</td>
+      <td>23</td>
+      <td>0.9392</td>
+      <td>0.0006</td>
+      <td>1,487</td>
+      <td>1.3045</td>
+      <td>N</td>
+      <td>5</td>
+      <td>6</td>
+      <td>5</td>
+      <td>...</td>
+      <td>28</td>
+      <td>0</td>
+      <td>209</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.406506e+09</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>B</td>
+      <td>25</td>
+      <td>0.9153</td>
+      <td>0.0007</td>
+      <td>935</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>6</td>
+      <td>9</td>
+      <td>6</td>
+      <td>...</td>
+      <td>20</td>
+      <td>1</td>
+      <td>20</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.421712e+09</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>J</td>
+      <td>23</td>
+      <td>0.8928</td>
+      <td>0.0004</td>
+      <td>1,113</td>
+      <td>1.2665</td>
+      <td>N</td>
+      <td>12</td>
+      <td>20</td>
+      <td>12</td>
+      <td>...</td>
+      <td>28</td>
+      <td>2</td>
+      <td>148</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.401235e+09</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>J</td>
+      <td>10</td>
+      <td>0.9691</td>
+      <td>0.0004</td>
+      <td>1,165</td>
+      <td>1.2665</td>
+      <td>N</td>
+      <td>5</td>
+      <td>8</td>
+      <td>6</td>
+      <td>...</td>
+      <td>19</td>
+      <td>2</td>
+      <td>170</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.371600e+09</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>F</td>
+      <td>11</td>
+      <td>0.9919</td>
+      <td>0.0038</td>
+      <td>564</td>
+      <td>1.1886</td>
+      <td>N</td>
+      <td>11</td>
+      <td>19</td>
+      <td>11</td>
+      <td>...</td>
+      <td>18</td>
+      <td>1</td>
+      <td>169</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.371514e+09</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>B</td>
+      <td>23</td>
+      <td>0.9403</td>
+      <td>0.0006</td>
+      <td>965</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>...</td>
+      <td>24</td>
+      <td>1</td>
+      <td>267</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.379981e+09</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>J</td>
+      <td>23</td>
+      <td>0.9691</td>
+      <td>0.0004</td>
+      <td>1,165</td>
+      <td>1.2665</td>
+      <td>N</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>192</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.373501e+09</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>B</td>
+      <td>23</td>
+      <td>0.9403</td>
+      <td>0.0006</td>
+      <td>965</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>8</td>
+      <td>14</td>
+      <td>9</td>
+      <td>...</td>
+      <td>11</td>
+      <td>1</td>
+      <td>162</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.370909e+09</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>B</td>
+      <td>25</td>
+      <td>0.9403</td>
+      <td>0.0007</td>
+      <td>935</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>9</td>
+      <td>15</td>
+      <td>9</td>
+      <td>...</td>
+      <td>5</td>
+      <td>2</td>
+      <td>36</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.391558e+09</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>B</td>
+      <td>25</td>
+      <td>0.9153</td>
+      <td>0.0007</td>
+      <td>935</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>17</td>
+      <td>23</td>
+      <td>17</td>
+      <td>...</td>
+      <td>27</td>
+      <td>4</td>
+      <td>58</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.424995e+09</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>J</td>
+      <td>20</td>
+      <td>0.9497</td>
+      <td>0.0004</td>
+      <td>1,165</td>
+      <td>1.2665</td>
+      <td>N</td>
+      <td>18</td>
+      <td>23</td>
+      <td>18</td>
+      <td>...</td>
+      <td>22</td>
+      <td>1</td>
+      <td>295</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.382400e+09</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>B</td>
+      <td>24</td>
+      <td>0.9403</td>
+      <td>0.0006</td>
+      <td>965</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>5</td>
+      <td>6</td>
+      <td>5</td>
+      <td>...</td>
+      <td>20</td>
+      <td>1</td>
+      <td>232</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.376957e+09</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>B</td>
+      <td>23</td>
+      <td>0.9403</td>
+      <td>0.0006</td>
+      <td>965</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>5</td>
+      <td>7</td>
+      <td>5</td>
+      <td>...</td>
+      <td>14</td>
+      <td>3</td>
+      <td>318</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.384387e+09</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>F</td>
+      <td>22</td>
+      <td>0.9893</td>
+      <td>0.0040</td>
+      <td>548</td>
+      <td>1.2433</td>
+      <td>N</td>
+      <td>10</td>
+      <td>17</td>
+      <td>10</td>
+      <td>...</td>
+      <td>24</td>
+      <td>1</td>
+      <td>55</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.424736e+09</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>J</td>
+      <td>26</td>
+      <td>0.8793</td>
+      <td>0.0004</td>
+      <td>1,113</td>
+      <td>1.2665</td>
+      <td>N</td>
+      <td>8</td>
+      <td>14</td>
+      <td>8</td>
+      <td>...</td>
+      <td>27</td>
+      <td>0</td>
+      <td>300</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.414368e+09</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>B</td>
+      <td>25</td>
+      <td>0.9153</td>
+      <td>0.0007</td>
+      <td>935</td>
+      <td>1.0200</td>
+      <td>N</td>
+      <td>6</td>
+      <td>8</td>
+      <td>6</td>
+      <td>...</td>
+      <td>6</td>
+      <td>4</td>
+      <td>37</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1.423181e+09</td>
+    </tr>
+  </tbody>
+</table>
+<p>30 rows × 309 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check that we have every quote number between 1 and 434589 inclusive. We do.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1, 434589, 434589, 434589, 434589)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To select a quote, use DataFrame.loc with the quote number in square brackets. For example quote number 1</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Field6                                        B
+Field7                                       23
+Field8                                   0.9403
+Field9                                   0.0006
+Field10                                     965
+                                       ...     
+Original_Quote_Is_quarter_end             False
+Original_Quote_Is_quarter_start           False
+Original_Quote_Is_year_end                False
+Original_Quote_Is_year_start              False
+Original_Quote_Elapsed             1376611200.0
+Name: 1, Length: 309, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similarly to select an "actual" quote conversion use Series of conversions sr_conv with quote number in square brackets</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sr_conv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see that our model predicts that quote 25 to be sucessful and it was</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qn</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">prd</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">qn</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Predicted success"</span><span class="p">,</span> <span class="n">prd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"with confidence"</span><span class="p">,</span> <span class="n">prd</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual success"</span><span class="p">,</span> <span class="n">sr_conv</span><span class="p">[</span><span class="n">qn</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Predicted success tensor(1) with confidence tensor([0.0107, 0.9893])
+Actual success 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-a-sensitivity-analysis-tool">
+<a class="anchor" href="#Create-a-sensitivity-analysis-tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a sensitivity analysis tool<a class="anchor-link" href="#Create-a-sensitivity-analysis-tool"> </a>
+</h2>
+<p>A field is sensitive if changing the value of the field can change the outcome of the predicted quote success</p>
+<p>While logging is INFO some logging will occur during a normal run. Setting logging level to WARNING will only log if an unknown dtype is encountered. See setup above to set level.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sensitivity_analysis</span><span class="p">(</span><span class="n">qn</span><span class="p">):</span>
+    <span class="sd">"""Using data from quote number qn do a sensitivity analysis on all independent variables"""</span>
+    <span class="c1"># Independent variables</span>
+    <span class="n">ind_original</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">qn</span><span class="p">]</span>
+    <span class="n">prd</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">ind_original</span><span class="p">)</span>
+    <span class="c1"># Predicted quote conversion flag</span>
+    <span class="n">qcf_original</span> <span class="o">=</span> <span class="n">prd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="c1"># Probability that quote conversion flag is as predicted</span>
+    <span class="n">prb_original</span> <span class="o">=</span> <span class="n">prd</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">qcf_original</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sensitivity Analysis for Quote </span><span class="si">{</span><span class="n">qn</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="c1"># Check if we actually know the correct answer</span>
+    <span class="k">if</span> <span class="n">qn</span> <span class="ow">in</span> <span class="n">sr_conv</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Actual QuoteConversion_Flag </span><span class="si">{</span><span class="n">sr_conv</span><span class="p">[</span><span class="n">qn</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">tf_sensitive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">v_original</span><span class="p">,</span> <span class="n">lst_v</span><span class="p">,</span> <span class="n">p_original</span><span class="p">):</span>
+        <span class="sd">"""predicts quote success after changing field f from v_original to each value in lst_v. </span>
+<span class="sd">        If prediction changes then quote is sensitive to the value of this field and True is returned"""</span>
+        <span class="c1"># Create a DataFrame which has every row identical except for field in question</span>
+        <span class="c1"># Field f iterates through every value provided</span>
+        <span class="n">ind_other</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">qn</span><span class="p">:</span><span class="n">qn</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># fields other than f</span>
+        <span class="n">ind_f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="n">f</span><span class="p">:</span> <span class="n">lst_v</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">qn</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_v</span><span class="p">))</span>
+        <span class="c1"># Merge these two DataFrames to create one with all rows identical except field f</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ind_other</span><span class="p">,</span> <span class="n">ind_f</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Copy lines from learn.predict() because we want to predict several rows at once (faster than one at a time)</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">dls</span><span class="o">.</span><span class="n">test_dl</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+        <span class="n">dl</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">conts</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">conts</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="c1"># stop learn.get_preds() printing blank lines</span>
+        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">capture_output</span><span class="p">()</span> <span class="k">as</span> <span class="n">captured</span><span class="p">:</span>
+            <span class="c1"># using get_preds() rather than predict() because get_preds can do multiple rows at once</span>
+            <span class="n">inp</span><span class="p">,</span><span class="n">preds</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">dec_preds</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">dl</span><span class="o">=</span><span class="n">dl</span><span class="p">,</span> <span class="n">with_input</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_decoded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">tf</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># Check if any predictions changed</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dec_preds</span><span class="p">):</span>
+            <span class="n">qcf</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">qcf</span> <span class="o">!=</span> <span class="n">qcf_original</span><span class="p">:</span>
+                <span class="n">prb</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">qcf</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Changing </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">val_original</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">lst_v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> changes predicted quote conversion flag "</span>
+                            <span class="sa">f</span><span class="s2">"from </span><span class="si">{</span><span class="n">prb_original</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">qcf_original</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">prb</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">qcf</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">tf</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">tf</span>
+
+    <span class="n">set_sensitive</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="c1"># Loop through all fields. Check different values of each field to see if result is sensitive to it.</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">ind_original</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">val_original</span> <span class="o">=</span> <span class="n">ind</span><span class="p">[</span><span class="n">field</span><span class="p">]</span>
+        <span class="n">tf_important</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">num_unique</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+        <span class="c1"># If number of unique values is under 30 then try every value (or for objects try every value)</span>
+        <span class="k">if</span> <span class="n">num_unique</span> <span class="o">&lt;</span> <span class="mi">30</span> <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'O'</span><span class="p">:</span>
+            <span class="n">lst_unique</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">tf_sensitive</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">val_original</span><span class="p">,</span> <span class="n">lst_unique</span><span class="p">,</span> <span class="n">prb_original</span><span class="p">):</span>
+                <span class="n">tf_important</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">tf_important</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Possible values of </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> are </span><span class="si">{</span><span class="n">lst_unique</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">set_sensitive</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"int64"</span><span class="p">:</span>
+                <span class="n">vmin</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+                <span class="n">vmax</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="n">lst_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">vmin</span> <span class="o">+</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span> <span class="o">//</span> <span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">num_unique</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> </span><span class="si">{</span><span class="n">vmin</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">vmax</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">lst_val</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tf_sensitive</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">val_original</span><span class="p">,</span> <span class="n">lst_val</span><span class="p">,</span> <span class="n">prb_original</span><span class="p">):</span>
+                    <span class="n">tf_important</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"float64"</span><span class="p">:</span>
+                <span class="n">vmin</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+                <span class="n">vmax</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="n">lst_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">vmin</span> <span class="o">+</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">num_unique</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> </span><span class="si">{</span><span class="n">vmin</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">vmax</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">lst_val</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tf_sensitive</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">val_original</span><span class="p">,</span> <span class="n">lst_val</span><span class="p">,</span> <span class="n">prb_original</span><span class="p">):</span>
+                    <span class="n">tf_important</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown type </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">num_unique</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tf_important</span><span class="p">:</span>
+                <span class="n">set_sensitive</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+    <span class="c1"># return the set of fields which had individual effects on the prediction</span>
+    <span class="k">return</span> <span class="n">set_sensitive</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Use-the-sensitivity-tool">
+<a class="anchor" href="#Use-the-sensitivity-tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use the sensitivity tool<a class="anchor-link" href="#Use-the-sensitivity-tool"> </a>
+</h1>
+<p>Here are the results of running the sensitivity analysis on quote number 2.</p>
+<p>Sensitivity Analysis for Quote 2</p>
+
+<pre><code>Changing SalesField5 from 5 to 3 changes predicted quote conversion flag from 97.04% 0 to 63.74% 1
+Changing SalesField5 from 5 to 4 changes predicted quote conversion flag from 97.04% 0 to 51.11% 1
+Changing PersonalField2 from 1 to 0 changes predicted quote conversion flag from 97.04% 0 to 65.11% 1
+Changing PersonalField13 from 2 to 1 changes predicted quote conversion flag from 97.04% 0 to 68.25% 1
+Changing PropertyField29 from nan to 10.0 changes predicted quote conversion flag from 97.04% 0 to 100.00% 1
+Changing PropertyField37 from N to Y changes predicted quote conversion flag from 97.04% 0 to 95.74% 1</code></pre>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sensitivity_analysis</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO:load_pickled_model:Sensitivity Analysis for Quote 2
+INFO:load_pickled_model:Actual QuoteConversion_Flag 0
+INFO:load_pickled_model:Changing SalesField5 from 5 to 3 changes predicted quote conversion flag from 97.04% 0 to 63.74% 1
+INFO:load_pickled_model:Changing SalesField5 from 5 to 4 changes predicted quote conversion flag from 97.04% 0 to 51.11% 1
+INFO:load_pickled_model:Possible values of SalesField5 are [5 3 2 4 1]
+INFO:load_pickled_model:Changing PersonalField2 from 1 to 0 changes predicted quote conversion flag from 97.04% 0 to 65.11% 1
+INFO:load_pickled_model:Possible values of PersonalField2 are [0 1]
+INFO:load_pickled_model:Changing PersonalField13 from 2 to 1 changes predicted quote conversion flag from 97.04% 0 to 68.25% 1
+INFO:load_pickled_model:Possible values of PersonalField13 are [2 1 4 3]
+INFO:load_pickled_model:Changing PropertyField29 from nan to 10.0 changes predicted quote conversion flag from 97.04% 0 to 100.00% 1
+INFO:load_pickled_model:Possible values of PropertyField29 are [ 0. nan  1. 10.]
+INFO:load_pickled_model:Changing PropertyField37 from N to Y changes predicted quote conversion flag from 97.04% 0 to 95.74% 1
+INFO:load_pickled_model:Possible values of PropertyField37 are ['N' 'Y' ' ']
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'PersonalField13',
+ 'PersonalField2',
+ 'PropertyField29',
+ 'PropertyField37',
+ 'SalesField5'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="redditech/team-fast-tabulous"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/team-fast-tabulous/jupyter/2021/07/12/Sensitivity-Analysis-On-Pickled-Models.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/team-fast-tabulous/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/team-fast-tabulous/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A fantastic team of FastAI learners, focused on a tabular data group project</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/redditech" title="redditech"><svg class="svg-icon grey"><use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/redditech" title="redditech"><svg class="svg-icon grey"><use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
