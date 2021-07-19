@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Moving TabularLearner from GPU to CPU | Team Fast-Tabulous!</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Moving TabularLearner from GPU to CPU" />
+<meta name="author" content="Tim Cummings" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Once the TabularLearner which contains a TabularModel has been trained on a GPU, we no longer require the GPU as predictions work on much smaller amounts of data. However, moving the TabularLearner to a CPU is not straightforward. This post shows you how." />
+<meta property="og:description" content="Once the TabularLearner which contains a TabularModel has been trained on a GPU, we no longer require the GPU as predictions work on much smaller amounts of data. However, moving the TabularLearner to a CPU is not straightforward. This post shows you how." />
+<link rel="canonical" href="https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/19/Moving-TabularLearner-from-GPU-to-CPU.html" />
+<meta property="og:url" content="https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/19/Moving-TabularLearner-from-GPU-to-CPU.html" />
+<meta property="og:site_name" content="Team Fast-Tabulous!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-19T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/19/Moving-TabularLearner-from-GPU-to-CPU.html","@type":"BlogPosting","headline":"Moving TabularLearner from GPU to CPU","dateModified":"2021-07-19T00:00:00-05:00","datePublished":"2021-07-19T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://redditech.github.io/team-fast-tabulous/jupyter/2021/07/19/Moving-TabularLearner-from-GPU-to-CPU.html"},"author":{"@type":"Person","name":"Tim Cummings"},"description":"Once the TabularLearner which contains a TabularModel has been trained on a GPU, we no longer require the GPU as predictions work on much smaller amounts of data. However, moving the TabularLearner to a CPU is not straightforward. This post shows you how.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/team-fast-tabulous/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://redditech.github.io/team-fast-tabulous/feed.xml" title="Team Fast-Tabulous!" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MHGYW30ZCF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MHGYW30ZCF');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/team-fast-tabulous/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/team-fast-tabulous/">Team Fast-Tabulous!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/team-fast-tabulous/about/">About Us</a><a class="page-link" href="/team-fast-tabulous/search/">Search</a><a class="page-link" href="/team-fast-tabulous/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Moving TabularLearner from GPU to CPU</h1><p class="page-description">Once the TabularLearner which contains a TabularModel has been trained on a GPU, we no longer require the GPU as predictions work on much smaller amounts of data. However, moving the TabularLearner to a CPU is not straightforward. This post shows you how.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-07-19T00:00:00-05:00" itemprop="datePublished">
+        Jul 19, 2021
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Tim Cummings</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/team-fast-tabulous/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/redditech/team-fast-tabulous/tree/master/_notebooks/2021-07-19-Moving-TabularLearner-from-GPU-to-CPU.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/redditech/team-fast-tabulous/master?filepath=_notebooks%2F2021-07-19-Moving-TabularLearner-from-GPU-to-CPU.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/redditech/team-fast-tabulous/blob/master/_notebooks/2021-07-19-Moving-TabularLearner-from-GPU-to-CPU.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/team-fast-tabulous/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Creating-TabularLearner-on-GPU">Creating TabularLearner on GPU </a></li>
+<li class="toc-entry toc-h2"><a href="#Moving-TabularLearner-from-GPU-to-GPU">Moving TabularLearner from GPU to GPU </a></li>
+<li class="toc-entry toc-h2"><a href="#Moving-TabularLearner-from-GPU-to-CPU">Moving TabularLearner from GPU to CPU </a></li>
+<li class="toc-entry toc-h2"><a href="#Alternative">Alternative </a></li>
+<li class="toc-entry toc-h2"><a href="#Alternatives-which-don't-work">Alternatives which don&#39;t work </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-07-19-Moving-TabularLearner-from-GPU-to-CPU.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-TabularLearner-on-GPU">
+<a class="anchor" href="#Creating-TabularLearner-on-GPU" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating TabularLearner on GPU<a class="anchor-link" href="#Creating-TabularLearner-on-GPU"> </a>
+</h2>
+<p>You may recall from <a href="https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/07/08/HomeSite-Quote-A-Fastai-Tabular-Approach.html">https://redditech.github.io/team-fast-tabulous/kaggle/fastai/2021/07/08/HomeSite-Quote-A-Fastai-Tabular-Approach.html</a> that we created a TabularLearner using the following steps</p>
+
+<pre><code>df = pd.read_csv('train.csv', ...)  # plus some EDA
+y_names = 'QuoteConversion_Flag'
+cont_names, cat_names = cont_cat_split(df, dep_var=y_names)
+# create TabularPandas
+to = TabularPandas(df, procs, cat_names, cont_names, y_names, y_block, splits)
+# create DataLoaders
+dls = to.dataloaders(bs=4096, val_bs=512, layers=[10000,500], embed_ps=0.02, ps=[0.001,0.01])
+# create TabularLearner 
+learn = tabular_learner(dls, metrics=RocAucBinary())
+# train the TabularLearner
+learn.fit_one_cycle(n_epoch=5, lr_max=1e-2, wd=0.002)</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Moving-TabularLearner-from-GPU-to-GPU">
+<a class="anchor" href="#Moving-TabularLearner-from-GPU-to-GPU" aria-hidden="true"><span class="octicon octicon-link"></span></a>Moving TabularLearner from GPU to GPU<a class="anchor-link" href="#Moving-TabularLearner-from-GPU-to-GPU"> </a>
+</h2>
+<p>Moving the TabularLearner from one GPU to another GPU was easy</p>
+
+<pre><code># GPU 1
+save_pickle("learner.pkl", learn)
+
+# GPU 2
+learn = load_pickle("learner.pkl")</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Moving-TabularLearner-from-GPU-to-CPU">
+<a class="anchor" href="#Moving-TabularLearner-from-GPU-to-CPU" aria-hidden="true"><span class="octicon octicon-link"></span></a>Moving TabularLearner from GPU to CPU<a class="anchor-link" href="#Moving-TabularLearner-from-GPU-to-CPU"> </a>
+</h2>
+<p>However <code>load_pickle("learner.pkl")</code> on a CPU will raise an exception because the pickle file is of a <code>TabularLearner</code> created for a GPU. The solution is to rebuild the <code>TabularLearner</code> on the CPU from the <code>DataLoaders</code> and the <code>TabularModel</code>. But first you have to convert the <code>DataLoaders</code> and the <code>TabularModel</code> to CPU versions and you have to do that while on the GPU or they won't load on the CPU. Use the <code>to()</code> method on both objects which converts in place and returns the converted object.</p>
+
+<pre><code># GPU
+save_pickle("dataloaders_cpu.pkl", learn.dls.to("cpu"))
+save_pickle("tabularmodel_cpu.pkl", learn.model.to("cpu"))
+
+# CPU
+dls = load_pickle("dataloaders_cpu.pkl")
+mdl = load_pickle("tabularmodel_cpu.pkl")
+learn = TabularLearner(dls=dls, model=mdl)
+
+</code></pre>
+<p>To check it loaded correctly on CPU, calculate some predictions and calculate the roc_auc_score</p>
+
+<pre><code>preds, targs = learn.get_preds()
+print(f"Trained deep learning model has a roc_auc_score of {roc_auc_score(to_np(targs), to_np(preds[:,1]))}")
+
+</code></pre>
+<p>And if correct it should print the same roc_auc_score calculated on the GPU.</p>
+
+<pre><code>Trained deep learning model has a roc_auc_score of 0.9630509311593953</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Alternative">
+<a class="anchor" href="#Alternative" aria-hidden="true"><span class="octicon octicon-link"></span></a>Alternative<a class="anchor-link" href="#Alternative"> </a>
+</h2>
+<p>If you don't have your dataloaders converted to CPU and then pickled, but you do have your TabularPandas pickled, then because TabularPandas doesn't need to be converted to CPU you can do the following</p>
+
+<pre><code># GPU
+save_pickle("tabularpandas.pkl", to)
+save_pickle("tabularmodel_cpu.pkl", learn.model.to("cpu"))
+
+# CPU
+to = load_pickle("tabularpandas.pkl")
+dls = to.dataloaders(bs=4096, val_bs=512, layers=[10000,500], embed_ps=0.02, ps=[0.001,0.01])
+mdl = load_pickle("tabularmodel_cpu.pkl")
+learn = TabularLearner(dls=dls, model=mdl)</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Alternatives-which-don't-work">
+<a class="anchor" href="#Alternatives-which-don't-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Alternatives which don't work<a class="anchor-link" href="#Alternatives-which-don't-work"> </a>
+</h2>
+<p>The error message when loading a GPU TabularLearner on a CPU is:</p>
+
+<pre><code>RuntimeError: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. If you are running on a CPU-only machine, please use torch.load with map_location=torch.device('cpu') to map your storages to the CPU.
+
+</code></pre>
+<p>The error message suggests that there is something that can be done on the CPU which can solve the problem. However I tried doing what it suggested.</p>
+
+<pre><code># GPU 
+save_pickle("tabularlearner.pkl", learn)
+save_pickle("tabularpandas.pkl", to)
+
+# CPU
+learn = load_pickle("tabularlearner.pkl")  # RuntimeError above
+learn = torch.load("tabularlearner.pkl", map_location=torch.device("cpu"))  # RuntimeError above
+
+</code></pre>
+<p>Another suggestion was using <code>learn.save("learn_save")</code> on the GPU which saves a file called <code>learn_save.pth</code>. This file can be loaded on CPU with <code>torch.load("learn_save.pth", map_location=torch.device("cpu"))</code> but it just gives a OrderDict with keys ["model", "opt"]. Looking online suggested I save the model state dict and use <code>load_state-dict</code> method on an empty model to load it back in. It looks like <code>learn_save.pth</code> maybe such a state dict but I didn't know how to create an empty <code>TabularModel</code> to call method <code>load_state_dict</code> on.</p>
+<p>Finally I thought that because the <code>to("cpu")</code> method works in place, I could convert <code>learn</code> to CPU version on GPU and only need to pickle one file. However none of the following attempts on the GPU created file which could be loaded on CPU.</p>
+
+<pre><code># Failure 1
+learn.to("cpu")
+save_pickle("fail.pkl", learn)
+
+# Failure 2
+learn.model.to("cpu")
+learn.dls.to("cpu")
+save_pickle("fail.pkl", learn)
+
+# Failure 3
+learn.model = learn.model.to("cpu")
+learn.dls = learn.dls.to("cpu")
+save_pickle("fail.pkl", learn)</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="redditech/team-fast-tabulous"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/team-fast-tabulous/jupyter/2021/07/19/Moving-TabularLearner-from-GPU-to-CPU.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/team-fast-tabulous/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/team-fast-tabulous/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A fantastic team of FastAI learners, focused on a tabular data group project</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/redditech" title="redditech"><svg class="svg-icon grey"><use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/redditech" title="redditech"><svg class="svg-icon grey"><use xlink:href="/team-fast-tabulous/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
