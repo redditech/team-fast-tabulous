@@ -138,6 +138,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Moving-TabularLearner-from-GPU-to-GPU">Moving TabularLearner from GPU to GPU </a></li>
 <li class="toc-entry toc-h2"><a href="#Moving-TabularLearner-from-GPU-to-CPU">Moving TabularLearner from GPU to CPU </a></li>
 <li class="toc-entry toc-h2"><a href="#Alternative">Alternative </a></li>
+<li class="toc-entry toc-h2"><a href="#Lightweight-Alternative">Lightweight Alternative </a></li>
 <li class="toc-entry toc-h2"><a href="#Alternatives-which-don't-work">Alternatives which don&#39;t work </a></li>
 </ul><!--
 #################################################
@@ -243,6 +244,34 @@ learn = TabularLearner(dls=dls, model=mdl)</code></pre>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lightweight-Alternative">
+<a class="anchor" href="#Lightweight-Alternative" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lightweight Alternative<a class="anchor-link" href="#Lightweight-Alternative"> </a>
+</h2>
+<p>If you don't need the original DataLoaders in your model you can export the model with an empty DataLoaders. This has the advantage of producing a very compact exported model in one step on the GPU.</p>
+
+<pre><code># GPU
+learn.export(fname="learn_empty_dls.pkl")
+
+# CPU
+learn = load_learner("learn_empty_dls.pkl")
+
+</code></pre>
+<p>The disadvantage is you can't test that the model came across properly using <code>learn.get_preds()</code> with no parameters, because it has no DataLoaders. However, you can still do inference using the following:</p>
+
+<pre><code># Pandas Series of independent variables (e.g. sr_row)
+pred = learn.predict(sr_row)
+
+# Pandas DataFrame with many rows of independent variables (e.g. df_rows)
+dl = learn.dls.test_dl(df_rows)
+dl.dataset.conts = dl.dataset.conts.astype(np.float32)
+inp,preds,_,dec_preds = learn.get_preds(dl=dl, with_input=True, with_decoded=True)</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Alternatives-which-don't-work">
 <a class="anchor" href="#Alternatives-which-don't-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Alternatives which don't work<a class="anchor-link" href="#Alternatives-which-don't-work"> </a>
 </h2>
@@ -262,6 +291,7 @@ learn = load_pickle("tabularlearner.pkl")  # RuntimeError above
 learn = torch.load("tabularlearner.pkl", map_location=torch.device("cpu"))  # RuntimeError above
 
 </code></pre>
+<p>Using the lightweight alternative described above <code>load_learner(filepath)</code> with a TabularLearner saved using <code>save_pickle</code> also produces the same error.</p>
 <p>Another suggestion was using <code>learn.save("learn_save")</code> on the GPU which saves a file called <code>learn_save.pth</code>. This file can be loaded on CPU with <code>torch.load("learn_save.pth", map_location=torch.device("cpu"))</code> but it just gives a OrderDict with keys ["model", "opt"]. Looking online suggested I save the model state dict and use <code>load_state-dict</code> method on an empty model to load it back in. It looks like <code>learn_save.pth</code> maybe such a state dict but I didn't know how to create an empty <code>TabularModel</code> to call method <code>load_state_dict</code> on.</p>
 <p>Finally I thought that because the <code>to("cpu")</code> method works in place, I could convert <code>learn</code> to CPU version on GPU and only need to pickle one file. However none of the following attempts on the GPU created file which could be loaded on CPU.</p>
 
